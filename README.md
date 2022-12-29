@@ -10,20 +10,21 @@ npm i -g @angular/cli@14
 4. yarn
 ````
 npm i -g yarn
-``
+```
 5. Redis: https://redis.io/docs/getting-started/installation/install-redis-on-windows/
+Nếu cài trên widow chạy nhân linux WSL2 thì cần cài WSL2 và Ubuntu (trên window store).
 6. Visual Studio 2022
 7. Visual Studio Code
 8. Sql Server 2019
 # Môi trường dev
-Chạy FE:
+I. Chạy FE:
 ```
 cd scr/angular
 yarn
 ng s -o --port 4201
 ```
-Chạy BE:
-1. Chạy redis sserver
+II. Chạy BE:
+1. Chạy redis sserver: mở ứng dụng Ubuntu
 ```
 sudo service redis-server start
 ```
@@ -37,7 +38,7 @@ update-database
 - ApiHost: 5102
 - Tài khoản: admin, mật khẩu: Admin@123
 2. Fix lỗi không tháy thư viện
-- cd AuthServer
 ```
+cd src\aspnet-core\src\WebBase.AuthServer
 abp install-libs
 ```

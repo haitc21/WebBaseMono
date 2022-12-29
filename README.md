@@ -4,11 +4,11 @@ web base theo mô hình monolihic gồn auth server dùng ABP Framework,.net 6 v
 1. >Net 6 SDK: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 2. Node.js <= 16.1: https://nodejs.org/en/
 3. Angular/Cli 14
-````
+```
 npm i -g @angular/cli@14
-``
+```
 4. yarn
-````
+```
 npm i -g yarn
 ```
 5. Redis: https://redis.io/docs/getting-started/installation/install-redis-on-windows/

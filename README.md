@@ -1,5 +1,6 @@
 # WebBaseMono
 web base theo mô hình monolihic gồn auth server dùng ABP Framework,.net 6 và angular 14
+
 # Cài đặt
 1. >Net 6 SDK: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 2. Node.js <= 16.1: https://nodejs.org/en/
@@ -12,10 +13,17 @@ npm i -g @angular/cli@14
 npm i -g yarn
 ```
 5. Redis: https://redis.io/docs/getting-started/installation/install-redis-on-windows/
-Nếu cài trên widow chạy nhân linux WSL2 thì cần cài WSL2 và Ubuntu (trên window store).
+Nếu cài trên widow chạy nhân linux WSL2 thì cần cài:
+- WSL2: https://learn.microsoft.com/en-us/windows/wsl/install
+- Ubuntu: Window Store
 6. Visual Studio 2022
 7. Visual Studio Code
 8. Sql Server 2019
+9. ABP CLi:
+```
+dotnet tool install -g Volo.Abp.Cli
+```
+
 # Môi trường dev
 I. Chạy FE:
 ```
@@ -28,17 +36,17 @@ II. Chạy BE:
 ```
 sudo service redis-server start
 ```
-2. Trong Visual Studio > tools > NUGet package manager
-```
-update-database
-```
-3. Chạy dự án DbMigrator
-4. Chạy setup run multi project
-- AuthServer: 5101
-- ApiHost: 5102
-- Tài khoản: admin, mật khẩu: Admin@123
 2. Fix lỗi không tháy thư viện
 ```
 cd src\aspnet-core\src\WebBase.AuthServer
 abp install-libs
 ```
+3. Trong Visual Studio > tools > NUGet package manager
+```
+update-database
+```
+4. Chạy dự án DbMigrator để Seed data
+5. Chạy setup run multi project
+- AuthServer: 5101
+- ApiHost: 5102
+- Tài khoản: admin, mật khẩu: Admin@123

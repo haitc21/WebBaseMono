@@ -57,4 +57,5 @@ update-database
 ```
 redis-cli flushall
 ```
-image.png
+Dùng công cụ AnotherRedisDesktopManager
+![alt text](https://github.com/haitc21/WebBaseMono/tree/develop/image/DeketeRedusCache.png?raw=true)

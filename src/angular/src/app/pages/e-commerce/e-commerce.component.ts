@@ -15,6 +15,10 @@ export class ECommerceComponent {
 
   login() {
     this.authService.navigateToLogin();
+    // this.authService.login({
+    //   username: 'admin',
+    //   password: 'Admin@123'
+    // });
   }
   logout() {
     this.oAuthService.logOut();

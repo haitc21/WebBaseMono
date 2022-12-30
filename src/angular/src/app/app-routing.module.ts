@@ -46,9 +46,7 @@ export const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
-  { path: 'books', loadChildren: () => import('./book/book.module').then(m => m.BookModule) },
-  { path: 'authors', loadChildren: () => import('./author/author.module').then(m => m.AuthorModule) },
+  { path: '**', redirectTo: 'pages' }
 ];
 
 const config: ExtraOptions = {

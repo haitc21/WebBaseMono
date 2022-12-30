@@ -5,8 +5,6 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { BookComponent } from '../book/book.component';
-import { AuthorComponent } from '../author/author.component';
 import { AuthGuard, PermissionGuard } from '@abp/ng.core';
 
 const routes: Routes = [
@@ -21,14 +19,6 @@ const routes: Routes = [
       {
         path: 'iot-dashboard',
         component: DashboardComponent,
-      },
-      {
-        path: 'books',
-        component: BookComponent,
-      },
-      {
-        path: 'authors',
-        component: AuthorComponent,
       },
       {
         path: 'layout',

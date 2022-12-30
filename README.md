@@ -1,7 +1,7 @@
-# WebBaseMono
+## WebBaseMono
 web base theo mô hình monolihic gồn auth server dùng ABP Framework,.net 6 và angular 14
 
-# Cài đặt
+## Cài đặt
 1. >Net 6 SDK: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 2. Node.js <= 16.1: https://nodejs.org/en/
 3. Angular/Cli 14
@@ -23,8 +23,10 @@ Nếu cài trên widow chạy nhân linux WSL2 thì cần cài:
 ```
 dotnet tool install -g Volo.Abp.Cli
 ```
+10. Công cụ quản lý redis AnotherRedisDesktopManager: https://gitee.com/qishibo/AnotherRedisDesktopManager/releases
 
-# Môi trường dev
+
+## Môi trường dev
 I. Chạy FE:
 ```
 cd scr/angular
@@ -50,3 +52,9 @@ update-database
 - AuthServer: 5101
 - ApiHost: 5102
 - Tài khoản: admin, mật khẩu: Admin@123
+
+# Clear redis cache
+```
+redis-cli flushall
+```
+image.png

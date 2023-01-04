@@ -11,9 +11,9 @@ export const environment = {
   },
   oAuthConfig: {
     issuer: 'https://localhost:5101/',
-    redirectUri: baseUrl,
+    // redirectUri: baseUrl,
     clientId: 'WebBase_App',
-    responseType: 'code',
+    // responseType: 'code',
     scope: 'offline_access WebBase',
     requireHttps: true,
   },

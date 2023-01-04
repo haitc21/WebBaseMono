@@ -1,10 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import {
+  NbMediaBreakpointsService,
+  NbMenuService,
+  NbSidebarService,
+  NbThemeService,
+} from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '@abp/ng.core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'ngx-header',
@@ -12,7 +19,6 @@ import { Subject } from 'rxjs';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
@@ -38,37 +44,59 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Thông tin' }, { title: 'Đăng xuất' }];
 
-  constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+  get hasLoggedIn(): boolean {
+    return this.oAuthService.hasValidAccessToken();
   }
+
+  constructor(
+    private sidebarService: NbSidebarService,
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService,
+    private oAuthService: OAuthService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    this.userService.getUsers()
+    this.userService
+      .getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+      .subscribe((users: any) => (this.user = users.nick));
 
     const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
+    this.themeService
+      .onMediaQueryChange()
       .pipe(
         map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
-      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
+      .subscribe((isLessThanXl: boolean) => (this.userPictureOnly = isLessThanXl));
 
-    this.themeService.onThemeChange()
+    this.themeService
+      .onThemeChange()
       .pipe(
         map(({ name }) => name),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
-      .subscribe(themeName => this.currentTheme = themeName);
+      .subscribe(themeName => (this.currentTheme = themeName));
+
+    // Config user right
+    this.menuService
+      .onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title)
+      )
+      .subscribe(title => {
+        console.log(title);
+        if(title == 'Đăng xuất') this.authService.logout();
+      });
   }
 
   ngOnDestroy() {

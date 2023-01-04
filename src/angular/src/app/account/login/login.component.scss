@@ -1,0 +1,20 @@
+.styleInput {
+    border: none;
+    border-bottom: 3px solid #07ad90;
+  }
+  input:focus {
+    box-shadow: 0 0 0 0.1rem transparent !important;
+  }
+  .styleBtn {
+    background-color: #07ad90;
+    color: #fff;
+    width: 100%;
+  }
+  .styleLabel {
+    color: #666;
+  }
+  .form-check-input:checked {
+    background-color: #42509e;
+    border-color: #42509e;
+  }
+  

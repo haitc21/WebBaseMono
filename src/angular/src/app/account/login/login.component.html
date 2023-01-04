@@ -1,0 +1,45 @@
+<section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit>
+      <div class="mb-3">
+        <label for="username" class="form-label styleLabel">Tên đăng nhập</label>
+        <input
+          class="form-control styleInput"
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Username"
+        />
+        >/div>
+        <div class="mb-3">
+          <label for="password" class="form-label styleLabel">Mật khẩu</label>
+          <input
+            class="form-control styleInput"
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check mb-2">
+              <input
+                class="mb-4 form-check-input"
+                type="checkbox"
+                id="login-input-remember-me"
+                formControlName="rememberMe"
+              />
+              <label class="form-check-label styleLabel" for="login-input-remember-me">
+                Ghi nhớ mật khẩu
+              </label>
+            </div>
+          </div>
+          <div class="text-end col">
+            <a style="color: #42509e">Quên mật khẩu</a>
+          </div>
+        </div>
+        <button class="d-grid btn styleBtn" type="submit">Đăng nhậơ</button>
+      </div>
+    </form>
+  </section>
+  

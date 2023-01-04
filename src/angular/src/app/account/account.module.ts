@@ -7,6 +7,8 @@ import { AccountComponent } from './account.component';
 import { AccountoutingModule } from './account-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { LoginComponent } from './login/login.component';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbUserModule } from '@nebular/theme';
+import { FormsRoutingModule } from '../pages/forms/forms-routing.module';
 @NgModule({
   declarations: [AccountComponent,LoginComponent],
   imports: [
@@ -16,7 +18,18 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     AccountoutingModule,
-    ThemeModule
+    ThemeModule,
+    NbInputModule,
+    NbCardModule,
+    NbButtonModule,
+    NbActionsModule,
+    NbUserModule,
+    NbCheckboxModule,
+    NbRadioModule,
+    NbDatepickerModule,
+    FormsRoutingModule,
+    NbSelectModule,
+    NbIconModule
   ],
   exports: [AccountComponent,LoginComponent],
 })

@@ -1,45 +1,53 @@
-<section>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit>
-      <div class="mb-3">
-        <label for="username" class="form-label styleLabel">Tên đăng nhập</label>
-        <input
-          class="form-control styleInput"
-          type="text"
-          id="username"
-          formControlName="username"
-          placeholder="Username"
-        />
-        >/div>
-        <div class="mb-3">
-          <label for="password" class="form-label styleLabel">Mật khẩu</label>
-          <input
-            class="form-control styleInput"
-            type="password"
-            id="password"
-            formControlName="password"
-            placeholder="Password"
-          />
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="form-check mb-2">
+<div class="row show-grid middle-content">
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>
+        <h5 style="text-align: center"> Đăng nhập </h5>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit>
+          <div class="form-group row">
+            <label for="inputEmail1" class="label col-sm-3 col-form-label">Tên đăng nhập</label>
+            <div class="col-sm-9">
               <input
-                class="mb-4 form-check-input"
-                type="checkbox"
-                id="login-input-remember-me"
-                formControlName="rememberMe"
+                formControlName="username"
+                type="text"
+                nbInput
+                fullWidth
+                id="inputEmail1"
+                placeholder="Tên đăng nhập"
               />
-              <label class="form-check-label styleLabel" for="login-input-remember-me">
-                Ghi nhớ mật khẩu
-              </label>
             </div>
           </div>
-          <div class="text-end col">
-            <a style="color: #42509e">Quên mật khẩu</a>
+          <div class="form-group row">
+            <label for="inputPassword2" class="label col-sm-3 col-form-label">Mật khẩu</label>
+            <div class="col-sm-9">
+              <input
+                formControlName="password"
+                type="password"
+                nbInput
+                fullWidth
+                id="inputPassword2"
+                placeholder="Mật khẩu"
+              />
+            </div>
           </div>
-        </div>
-        <button class="d-grid btn styleBtn" type="submit">Đăng nhậơ</button>
-      </div>
-    </form>
-  </section>
-  
+
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <div class="checkbox">
+                <nb-checkbox formControlName="rememberMe">Nhớ mật khẩu</nb-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="submit" nbButton status="primary">Đăng nhập</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

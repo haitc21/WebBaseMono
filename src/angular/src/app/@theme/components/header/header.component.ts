@@ -8,10 +8,11 @@ import {
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthService } from '@abp/ng.core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -58,6 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private oAuthService: OAuthService,
+    protected route: ActivatedRoute,
+    protected router: Router,
     private authService: AuthService
   ) {}
 
@@ -94,8 +97,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         map(({ item: { title } }) => title)
       )
       .subscribe(title => {
-        console.log(title);
-        if(title == 'Đăng xuất') this.authService.logout();
+        if (title == 'Đăng xuất') {
+          this.oAuthService.logOut();
+          this.router.navigate(['account/login']);
+        }
       });
   }
 

@@ -6,10 +6,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
   templateUrl: './e-commerce.component.html',
 })
 export class ECommerceComponent {
-  get hasLoggedIn(): boolean {
-    return this.oAuthService.hasValidAccessToken();
-  }
-
   constructor(private oAuthService: OAuthService, private authService: AuthService) {
     // console.log(this.oAuthService.clientId);
     // console.log(this.oAuthService.scope);
@@ -19,16 +15,5 @@ export class ECommerceComponent {
     // console.log('refreshToken',refreshToken);
     // let identityClaim = this.oAuthService.getIdentityClaims();
     // console.log('getGrantedScopes',identityClaim);
-  }
-
-  login() {
-    // this.authService.navigateToLogin();
-    this.authService.login({
-      username: 'admin',
-      password: 'Admin@123'
-    });
-  }
-  logout() {
-    this.oAuthService.logOut();
   }
 }

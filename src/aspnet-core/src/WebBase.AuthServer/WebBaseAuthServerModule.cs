@@ -76,8 +76,8 @@ public class WebBaseAuthServerModule : AbpModule
                     typeof(AbpUiResource)
                 );
 
-            options.Languages.Add(new LanguageInfo("vi", "vi", "Việt Nam", "fa-solid fa-flag-usa"));
-            options.Languages.Add(new LanguageInfo("en", "en", "English", "fa-solid fa-flag-usa"));
+            options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
+            options.Languages.Add(new LanguageInfo("en", "en", "English");
 
         });
 

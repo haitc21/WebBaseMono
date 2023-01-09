@@ -1,8 +1,9 @@
 import { AuthService } from '@abp/ng.core';
 import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { of, pipe, throwError } from 'rxjs';
-import { catchError, finalize, switchMap, tap } from 'rxjs/operators';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { ToastType } from 'src/app/shared/enum';
+import { Util } from 'src/app/shared/util';
 
 const { maxLength, required } = Validators;
 
@@ -18,10 +19,12 @@ export class LoginComponent implements OnInit {
 
   protected fb: FormBuilder;
   protected authService: AuthService;
+  protected toastrService: NbToastrService;
 
   constructor(protected injector: Injector) {
     this.fb = injector.get(FormBuilder);
     this.authService = injector.get(AuthService);
+    this.toastrService = injector.get(NbToastrService);
   }
 
   ngOnInit() {
@@ -49,7 +52,13 @@ export class LoginComponent implements OnInit {
         // console.log(data);
       },
       err => {
-        console.log(err.error?.error_description);
+        debugger;
+        console.log('error_description',err.error?.error_description);
+        this.toastrService.show(
+          err.error?.error_description,
+          'Có lỗi xảy ra',
+          Util.configDefaultToast(ToastType.danger)
+        );
       }
     );
   }

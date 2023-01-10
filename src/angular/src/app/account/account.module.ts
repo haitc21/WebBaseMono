@@ -9,6 +9,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { LoginComponent } from './login/login.component';
 import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbUserModule } from '@nebular/theme';
 import { FormsRoutingModule } from '../pages/forms/forms-routing.module';
+import { ValidationMsgModule } from '../shared/modules';
 @NgModule({
   declarations: [AccountComponent,LoginComponent],
   imports: [
@@ -29,7 +30,8 @@ import { FormsRoutingModule } from '../pages/forms/forms-routing.module';
     NbDatepickerModule,
     FormsRoutingModule,
     NbSelectModule,
-    NbIconModule
+    NbIconModule,
+    ValidationMsgModule
   ],
   exports: [AccountComponent,LoginComponent],
 })

@@ -2,8 +2,8 @@ import { AuthService } from '@abp/ng.core';
 import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { ToastType } from 'src/app/shared/enum';
-import { Util } from 'src/app/shared/util';
+import { ToastType } from 'src/app/shared/enums';
+import { Util } from 'src/app/shared/utilities';
 
 const { maxLength, required } = Validators;
 
@@ -21,6 +21,25 @@ export class LoginComponent implements OnInit {
   protected authService: AuthService;
   protected toastrService: NbToastrService;
 
+  validation_messages = {
+    username: [
+      { type: 'required', message: 'Tên tài khoàn không được để trống!' },
+      {
+        type: 'maxlength',
+        message: 'Tên tài khoản không quá 255 ký tự',
+      },
+    ],
+    password: [
+      { type: 'required', message: 'Mật khẩukhông được để trống!' },
+      {
+        type: 'maxlength',
+        message: 'Mật khẩu không quá 255 ký tự',
+      },
+    ],
+  };
+  get formControls() {
+    return this.form.controls;
+  }
   constructor(protected injector: Injector) {
     this.fb = injector.get(FormBuilder);
     this.authService = injector.get(AuthService);
@@ -53,7 +72,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         debugger;
-        console.log('error_description',err.error?.error_description);
+        console.log('error_description', err.error?.error_description);
         this.toastrService.show(
           err.error?.error_description,
           'Có lỗi xảy ra',

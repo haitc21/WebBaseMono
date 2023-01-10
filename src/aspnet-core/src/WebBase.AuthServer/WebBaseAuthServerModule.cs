@@ -77,7 +77,7 @@ public class WebBaseAuthServerModule : AbpModule
                 );
 
             options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
-            options.Languages.Add(new LanguageInfo("en", "en", "English");
+            options.Languages.Add(new LanguageInfo("en", "en", "English"));
 
         });
 

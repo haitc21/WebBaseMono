@@ -1,6 +1,6 @@
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrConfig } from '@nebular/theme';
 import { Consts } from '../consts';
-import { ToastType } from '../enum';
+import { ToastType } from '../enums';
 
 export class Util {
   static configDefaultToast(

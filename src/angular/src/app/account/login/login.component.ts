@@ -1,4 +1,4 @@
-import { AuthService } from '@abp/ng.core';
+import { AuthService, LocalizationService } from '@abp/ng.core';
 import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   protected fb: FormBuilder;
   protected authService: AuthService;
   protected toastrService: NbToastrService;
+  protected localizationService: LocalizationService;
 
   validation_messages = {
     username: [
@@ -44,10 +45,13 @@ export class LoginComponent implements OnInit {
     this.fb = injector.get(FormBuilder);
     this.authService = injector.get(AuthService);
     this.toastrService = injector.get(NbToastrService);
+    this.localizationService = injector.get(LocalizationService);
   }
 
   ngOnInit() {
     this.buildForm();
+    let saiMK = this.localizationService.instant('AbpAccount::InvalidUserNameOrPassword');
+    console.log(saiMK);
   }
 
   protected buildForm() {
@@ -71,10 +75,14 @@ export class LoginComponent implements OnInit {
         // console.log(data);
       },
       err => {
-        debugger;
-        console.log('error_description', err.error?.error_description);
+        let errorMsg =
+          err.error?.error_description ||
+          err.error?.error?.message ||
+          'AbpAccount::DefaultErrorMessage';
+        null;
+        console.log('error_description', errorMsg);
         this.toastrService.show(
-          err.error?.error_description,
+          errorMsg,
           'Có lỗi xảy ra',
           Util.configDefaultToast(ToastType.danger)
         );

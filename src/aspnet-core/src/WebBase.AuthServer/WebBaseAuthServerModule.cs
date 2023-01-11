@@ -34,6 +34,11 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
+using System.Globalization;
+using Volo.Abp.OpenIddict.Localization;
+using Volo.Abp.Account.Localization;
 
 namespace WebBase;
 
@@ -77,7 +82,7 @@ public class WebBaseAuthServerModule : AbpModule
                 );
 
             options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
-            options.Languages.Add(new LanguageInfo("en", "en", "English"));
+            //options.Languages.Add(new LanguageInfo("en", "en", "English"));
 
         });
 
@@ -94,8 +99,8 @@ public class WebBaseAuthServerModule : AbpModule
 
         Configure<AbpAuditingOptions>(options =>
         {
-                //options.IsEnabledForGetRequests = true;
-                options.ApplicationName = "AuthServer";
+            //options.IsEnabledForGetRequests = true;
+            options.ApplicationName = "AuthServer";
         });
 
         if (hostingEnvironment.IsDevelopment())
@@ -132,7 +137,7 @@ public class WebBaseAuthServerModule : AbpModule
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "WebBase-Protection-Keys");
         }
-        
+
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {
             var connection = ConnectionMultiplexer
@@ -170,7 +175,23 @@ public class WebBaseAuthServerModule : AbpModule
             app.UseDeveloperExceptionPage();
         }
 
-        app.UseAbpRequestLocalization();
+        //app.UseAbpRequestLocalization();
+        var supportedCultures = new[]
+    {
+            new CultureInfo("vi"),
+            new CultureInfo("en")
+        };
+        app.UseAbpRequestLocalization(options =>
+        {
+            options.DefaultRequestCulture = new RequestCulture("vi");
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+            options.RequestCultureProviders = new List<IRequestCultureProvider>
+            {
+                new QueryStringRequestCultureProvider(),
+                new CookieRequestCultureProvider()
+            };
+        });
 
         if (!env.IsDevelopment())
         {
@@ -183,7 +204,7 @@ public class WebBaseAuthServerModule : AbpModule
         app.UseCors();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
-       
+
         if (MultiTenancyConsts.IsEnabled)
         {
             app.UseMultiTenancy();

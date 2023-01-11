@@ -21,6 +21,8 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 
+import { storeLocaleData } from '@abp/ng.core/locale';
+import(`@/../@angular/common/locales/vi.mjs`).then(m => storeLocaleData(m.default, 'vi'));
 
 @NgModule({
   imports: [

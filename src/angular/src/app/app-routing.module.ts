@@ -9,6 +9,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'account',
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
   },
@@ -16,8 +21,8 @@ export const routes: Routes = [
     path: 'account',
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  { path: '**', redirectTo: 'admin' },
 ];
 
 const config: ExtraOptions = {

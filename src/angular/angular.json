@@ -36,7 +36,8 @@
               "zrender/lib/svg/svg",
               "zrender/lib/vml/vml",
               "just-clone",
-              "eva-icons"
+              "eva-icons",
+              "leaflet"
             ],
             "assets": [
               "src/assets",

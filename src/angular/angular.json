@@ -34,7 +34,9 @@
               "echarts",
               "lodash",
               "zrender/lib/svg/svg",
-              "zrender/lib/vml/vml"
+              "zrender/lib/vml/vml",
+              "just-clone",
+              "eva-icons"
             ],
             "assets": [
               "src/assets",
@@ -135,7 +137,10 @@
               "node_modules/echarts/dist/echarts.min.js",
               "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules"]
+            }
           },
           "configurations": {
             "production": {

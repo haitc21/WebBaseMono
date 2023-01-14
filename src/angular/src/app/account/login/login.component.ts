@@ -2,6 +2,7 @@ import { AuthService, LocalizationService } from '@abp/ng.core';
 import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { Consts } from 'src/app/shared/consts';
 import { ToastType } from 'src/app/shared/enums';
 import { Util } from 'src/app/shared/utilities';
 
@@ -50,8 +51,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    let saiMK = this.localizationService.instant('AbpAccount::InvalidUserNameOrPassword');
-    console.log(saiMK);
   }
 
   protected buildForm() {
@@ -79,12 +78,20 @@ export class LoginComponent implements OnInit {
           err.error?.error_description ||
           err.error?.error?.message ||
           'AbpAccount::DefaultErrorMessage';
-        null;
+        if (errorMsg.includes('Invalid username or password!')) {
+          errorMsg = this.localizationService.instant('AbpAccount::InvalidUserNameOrPassword');
+        } else if (
+          errorMsg.includes(
+            'The user account has been locked out due to invalid login attempts. Please wait a while and try again.'
+          )
+        ) {
+          errorMsg = this.localizationService.instant('AbpAccount::UserLockedOutMessage');
+        }
         console.log('error_description', errorMsg);
         this.toastrService.show(
           errorMsg,
-          'Có lỗi xảy ra',
-          Util.configDefaultToast(ToastType.danger)
+          Consts.TOAST_WARNING_TITILE,
+          Util.configDefaultToast(ToastType.warning)
         );
       }
     );

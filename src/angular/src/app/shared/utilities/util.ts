@@ -9,7 +9,7 @@ export class Util {
     destroyByClick: boolean = Consts.TOAST_SESTROY_BY_CLICK,
     duration: number = Consts.TOAST_DURATION,
     hasIcon: boolean = Consts.TOAST_HAS_ICON,
-    preventDuplicates: Boolean = Consts.PREVENT_DUPLICATES
+    preventDuplicates: Boolean = Consts.TOAST_PREVENT_DUPLICATES
   ) {
     const config = {
       status: type,

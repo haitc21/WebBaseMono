@@ -7,7 +7,9 @@
       <nb-card-body>
         <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit>
           <div class="form-group row">
-            <label for="inputEmail1" class="label col-sm-3 col-form-label">Tên đăng nhập</label>
+            <label for="inputEmail1" class="label col-sm-3 col-form-label">{{
+              'AbpIdentity::UserName' | abpLocalization
+            }}</label>
             <div class="col-sm-9">
               <input
                 formControlName="username"
@@ -15,7 +17,9 @@
                 nbInput
                 fullWidth
                 id="inputEmail1"
-                placeholder="Tên đăng nhập"
+                placeholder="{{
+                  'AbpAccount::UserNameOrEmailAddress' | abpLocalization
+                }}"
               />
               <app-validation-msg
                 [entityControl]="formControls.username"
@@ -25,7 +29,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword2" class="label col-sm-3 col-form-label">Mật khẩu</label>
+            <label for="inputPassword2" class="label col-sm-3 col-form-label">{{
+              'AbpIdentity::Password' | abpLocalization
+            }}</label>
             <div class="col-sm-9">
               <input
                 formControlName="password"
@@ -33,7 +39,7 @@
                 nbInput
                 fullWidth
                 id="inputPassword2"
-                placeholder="Mật khẩu"
+                placeholder="{{ 'AbpIdentity::Password' | abpLocalization }}"
               />
               <app-validation-msg
                 [entityControl]="formControls.password"

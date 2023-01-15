@@ -20,7 +20,7 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
       catchError(ex => {
         if (ex.status == 500) {
           let InternalServerErrorMessage = this.localizationService.instant(
-            'AbpAccount::InternalServerErrorMessage'
+            'AbpFeatureManagement::InternalServerErrorMessage'
           );
           this.toastrService.show(
             InternalServerErrorMessage,

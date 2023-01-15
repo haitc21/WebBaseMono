@@ -3,6 +3,8 @@
   "texts": {
     "Menu:Home": "Trang chủ",
     "Welcome": "Xin chào",
-    "LongWelcomeMessage": "Chào mừng bạn đến WebBase!"
+    "LongWelcomeMessage": "Chào mừng bạn đến WebBase!",
+    // Exceptions
+    "WebBaseEx:RoleNameAlreadyExists": "Vai trò {Name} đã tồn tại"
   }
 }

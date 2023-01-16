@@ -20,12 +20,6 @@ public class WebBaseApplicationAutoMapperProfile : Profile
             x.ExtraProperties[RoleConsts.DescriptionFieldName]
             :
             null));
-        CreateMap<IdentityRole, RoleInListDto>().ForMember(x => x.Description,
-            map => map.MapFrom(x => x.ExtraProperties.ContainsKey(RoleConsts.DescriptionFieldName)
-            ?
-            x.ExtraProperties[RoleConsts.DescriptionFieldName]
-            :
-            null));
         CreateMap<CreateUpdateRoleDto, IdentityRole>();
 
         //User

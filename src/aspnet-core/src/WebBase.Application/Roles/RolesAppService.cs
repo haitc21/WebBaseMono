@@ -19,6 +19,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SimpleStateChecking;
 using Volo.Abp.Data;
 using WebBase.Localization;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebBase.Roles;
 
@@ -32,18 +33,21 @@ public class RolesAppService : CrudAppService<
     CreateUpdateRoleDto,
     CreateUpdateRoleDto>, IRolesAppService
 {
+    protected IdentityRoleManager RoleManager { get; }
     protected PermissionManagementOptions Options { get; }
     protected IPermissionManager PermissionManager { get; }
     protected IPermissionDefinitionManager PermissionDefinitionManager { get; }
     protected ISimpleStateCheckerManager<PermissionDefinition> SimpleStateCheckerManager { get; }
 
-    public RolesAppService(IRepository<IdentityRole, Guid> repository, 
+    public RolesAppService(IRepository<IdentityRole, Guid> repository,
+        IdentityRoleManager roleManager,
         IPermissionManager permissionManager,
     IPermissionDefinitionManager permissionDefinitionManager,
     IOptions<PermissionManagementOptions> options,
     ISimpleStateCheckerManager<PermissionDefinition> simpleStateCheckerManager)
         : base(repository)
     {
+        RoleManager = roleManager;
         Options = options.Value;
         PermissionManager = permissionManager;
         PermissionDefinitionManager = permissionDefinitionManager;
@@ -68,18 +72,18 @@ public class RolesAppService : CrudAppService<
 
     [Authorize(IdentityPermissions.Roles.Default)]
 
-    public async Task<List<RoleInListDto>> GetListAllAsync()
+    public async Task<List<RoleDto>> GetListAllAsync()
     {
         var query = await Repository.GetQueryableAsync();
         var data = await AsyncExecuter.ToListAsync(query);
 
-        return ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data);
+        return ObjectMapper.Map<List<IdentityRole>, List<RoleDto>>(data);
 
     }
 
     [Authorize(IdentityPermissions.Roles.Default)]
 
-    public async Task<PagedResultDto<RoleInListDto>> GetListFilterAsync(BaseListFilterDto input)
+    public async Task<PagedResultDto<RoleDto>> GetListFilterAsync(BaseListFilterDto input)
     {
         var query = await Repository.GetQueryableAsync();
         query = query.WhereIf(!string.IsNullOrWhiteSpace(input.Keyword), x => x.Name.Contains(input.Keyword));
@@ -87,51 +91,48 @@ public class RolesAppService : CrudAppService<
         var totalCount = await AsyncExecuter.LongCountAsync(query);
         var data = await AsyncExecuter.ToListAsync(query.Skip(input.SkipCount).Take(input.MaxResultCount));
 
-        return new PagedResultDto<RoleInListDto>(totalCount, ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data));
+        return new PagedResultDto<RoleDto>(totalCount, ObjectMapper.Map<List<IdentityRole>, List<RoleDto>>(data));
     }
 
     [Authorize(IdentityPermissions.Roles.Create)]
 
     public async override Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
     {
-        var query = await Repository.GetQueryableAsync();
-        var isNameExisted = query.Any(x => x.Name == input.Name);
-        if (isNameExisted)
+        var role = new IdentityRole(
+           GuidGenerator.Create(),
+           input.Name
+       )
         {
-            throw new BusinessException(WebBaseDomainErrorCodes.RoleNameAlreadyExists)
-                .WithData("Name", input.Name);
-        }
-        var role = new IdentityRole(Guid.NewGuid(), input.Name);
+            IsDefault = input.IsDefault,
+            IsPublic = input.IsPublic
+        };
         role.SetProperty(RoleConsts.DescriptionFieldName, input.Description);
-        var data = await Repository.InsertAsync(role);
-        await UnitOfWorkManager.Current.SaveChangesAsync();
-        return ObjectMapper.Map<IdentityRole, RoleDto>(data);
+        (await RoleManager.CreateAsync(role)).CheckErrors();
+        await CurrentUnitOfWork.SaveChangesAsync();
+        return ObjectMapper.Map<IdentityRole, RoleDto>(role);
     }
 
     [Authorize(IdentityPermissions.Roles.Update)]
 
     public async override Task<RoleDto> UpdateAsync(Guid id, CreateUpdateRoleDto input)
     {
-        var role = await Repository.GetAsync(id);
-        if (role == null)
-        {
-            throw new EntityNotFoundException(typeof(IdentityRole), id);
-        }
-        var query = await Repository.GetQueryableAsync();
-        var isNameExisted = query.Any(x => x.Name == input.Name && x.Id != id);
-        if (isNameExisted)
-        {
-            throw new BusinessException(WebBaseDomainErrorCodes.RoleNameAlreadyExists)
-                .WithData("Name", input.Name);
-        }
+        var role = await RoleManager.GetByIdAsync(id);
+
+        role.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
+
+        (await RoleManager.SetRoleNameAsync(role, input.Name)).CheckErrors();
+
+        role.IsDefault = input.IsDefault;
+        role.IsPublic = input.IsPublic;
         role.SetProperty(RoleConsts.DescriptionFieldName, input.Description);
-        var data = await Repository.UpdateAsync(role);
-        await UnitOfWorkManager.Current.SaveChangesAsync();
-        return ObjectMapper.Map<IdentityRole, RoleDto>(data);
+
+
+        (await RoleManager.UpdateAsync(role)).CheckErrors();
+        await CurrentUnitOfWork.SaveChangesAsync();
+        return ObjectMapper.Map<IdentityRole, RoleDto>(role);
     }
 
     [Authorize(IdentityPermissions.Roles.Default)]
-
     public async Task<GetPermissionListResultDto> GetPermissionsAsync(string providerName, string providerKey)
     {
         //await CheckProviderPolicy(providerName);

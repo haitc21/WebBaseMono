@@ -11,6 +11,9 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },      {
+        path: 'login/:redirectUrl',
+        component: LoginComponent,
       },
       {
         path: '',

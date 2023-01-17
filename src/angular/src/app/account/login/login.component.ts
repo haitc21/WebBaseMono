@@ -1,6 +1,7 @@
 import { AuthService, LocalizationService } from '@abp/ng.core';
 import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Consts } from 'src/app/shared/consts';
 import { ToastType } from 'src/app/shared/enums';
@@ -17,11 +18,13 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   inProgress: boolean;
+  redirectUrl: string = '/';
 
   protected fb: FormBuilder;
   protected authService: AuthService;
   protected toastrService: NbToastrService;
   protected localizationService: LocalizationService;
+  protected route: ActivatedRoute;
 
   validation_messages = {
     username: [
@@ -47,9 +50,11 @@ export class LoginComponent implements OnInit {
     this.authService = injector.get(AuthService);
     this.toastrService = injector.get(NbToastrService);
     this.localizationService = injector.get(LocalizationService);
+    this.route = injector.get(ActivatedRoute);
   }
 
   ngOnInit() {
+    this.redirectUrl = this.route.snapshot.paramMap.get('redirectUrl') ?? '/';
     this.buildForm();
   }
 
@@ -67,7 +72,7 @@ export class LoginComponent implements OnInit {
     this.inProgress = true;
 
     const { username, password, rememberMe } = this.form.value;
-    const redirectUrl = '/';
+    const redirectUrl = this.redirectUrl;
     const loginParams = { username, password, rememberMe, redirectUrl };
     this.authService.login(loginParams).subscribe(
       data => {

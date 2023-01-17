@@ -179,7 +179,7 @@ public class WebBaseAuthServerModule : AbpModule
         var supportedCultures = new[]
     {
             new CultureInfo("vi"),
-            new CultureInfo("en")
+            //new CultureInfo("en")
         };
         app.UseAbpRequestLocalization(options =>
         {

@@ -37,10 +37,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       value: 'cosmic',
       name: 'Cosmic',
     },
-    // {
-    //   value: 'corporate',
-    //   name: 'Corporate',
-    // },
+    {
+      value: 'corporate',
+      name: 'Corporate',
+    },
+    {
+      value: 'material-light',
+      name: 'Material Light',
+    },
+    {
+      value: 'material-dark',
+      name: 'Material Dark',
+    },
   ];
 
   currentTheme = 'default';
@@ -99,10 +107,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(title => {
         if (title == 'Đăng xuất') {
           this.oAuthService.logOut();
-          this.router.navigate([`account/login`,this.router.url]);
+          this.router.navigate([`account/login`, this.router.url]);
         }
       });
-  }333333333333333333
+  }
+  333333333333333333;
 
   ngOnDestroy() {
     this.destroy$.next();

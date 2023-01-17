@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotFoundComponent } from '../shared/modules/miscellaneous/not-found/not-found.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'roles',
+        component: RolesComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
       },
       {
         path: 'miscellaneous',

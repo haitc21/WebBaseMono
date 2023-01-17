@@ -21,6 +21,24 @@ export class AdminComponent implements OnInit {
         link: '/admin/dashboard',
         home: true,
       },
+      {
+        title: 'Quản trị',
+        group: true,
+      },
+      {
+        title: 'Quản trị người dùng',
+        icon: 'layout-outline',
+        children: [
+          {
+            title: 'Vai trò',
+            link: '/admin/roles',
+          },
+          {
+            title: 'Người dùng',
+            link: '/admin/users',
+          }
+        ],
+      },
     ];
   }
 }

@@ -22,15 +22,12 @@ export class AdminComponent implements OnInit {
         home: true,
       },
       {
-        title: 'Quản trị',
-        group: true,
-      },
-      {
         title: 'Quản trị người dùng',
-        icon: 'layout-outline',
+        icon: 'lock-outline',
         children: [
           {
             title: 'Vai trò',
+            icon: 'grid-outline',
             link: '/admin/roles',
           },
           {

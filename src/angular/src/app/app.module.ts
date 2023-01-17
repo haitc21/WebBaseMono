@@ -25,6 +25,10 @@ import { storeLocaleData } from '@abp/ng.core/locale';
 import { GlobalHttpInterceptorService, TokenInterceptor } from './shared/interceptors';
 import(`@/../@angular/common/locales/vi.mjs`).then(m => storeLocaleData(m.default, 'vi'));
 
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogService } from 'primeng/dynamicdialog';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -47,20 +51,24 @@ import(`@/../@angular/common/locales/vi.mjs`).then(m => storeLocaleData(m.defaul
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    ConfirmDialogModule,
   ],
   declarations: [AppComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: GlobalHttpInterceptorService,
-      multi: true
+      multi: true,
     },
-    APP_ROUTE_PROVIDER],
+    APP_ROUTE_PROVIDER,
+    ConfirmationService,
+    DialogService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

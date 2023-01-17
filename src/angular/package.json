@@ -57,6 +57,8 @@
     "ngx-echarts": "^4.2.2",
     "normalize.css": "6.0.0",
     "pace-js": "1.0.2",
+    "primeicons": "^6.0.1",
+    "primeng": "14.2.2",
     "roboto-fontface": "0.8.0",
     "rxjs": "7.5.6",
     "rxjs-compat": "6.3.0",

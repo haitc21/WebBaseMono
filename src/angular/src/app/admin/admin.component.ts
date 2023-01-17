@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
           },
           {
             title: 'Người dùng',
+            icon: 'people-outline',
             link: '/admin/users',
           }
         ],

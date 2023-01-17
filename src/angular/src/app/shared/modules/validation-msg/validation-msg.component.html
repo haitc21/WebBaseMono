@@ -1,9 +1,10 @@
 <ng-container *ngIf="entityControl.invalid && entityControl.dirty">
   <ng-container *ngFor="let validation of validationMessages">
-    <div class="item text-danger mt-10" *ngIf="entityControl.errors[validation.type]">
-      <div class="color bg-status-danger"></div>
-      <div>
-        {{ validation.message }}
+    <div class="item validation-msg" *ngIf="entityControl.errors[validation.type]">
+      <div class="color bg-status-warning">
+        <p>
+          {{ validation.message }}
+        </p>
       </div>
     </div>
   </ng-container>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import { NbCardModule, NbMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
-import { MiscellaneousModule } from '../shared/modules';
+import { MiscellaneousModule, ValidationMessageModule } from '../shared/modules';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { DashboardModule } from './components/dashboard/dashboard.module';
@@ -26,14 +26,26 @@ import { BadgeModule } from 'primeng/badge';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PickListModule } from 'primeng/picklist';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { PermissionGrantComponent } from './components/role/permission-grant.component';
+import { RoleDetailComponent } from './components/role/role-detail.component';
+import { RoleComponent } from './components/role/role.component';
+import { CoreModule } from '@abp/ng.core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
-    AdminRoutingModule,
+    CoreModule,
+    AdminRoutingModule,   
+     FormsModule,
+    ReactiveFormsModule,
     ThemeModule,
     NbMenuModule,
     DashboardModule,
     MiscellaneousModule,
+
+    NbCardModule,
+    Ng2SmartTableModule,
 
     CalendarModule,
     PanelModule,
@@ -54,7 +66,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     ConfirmDialogModule,
     PickListModule,
     KeyFilterModule,
+    ValidationMessageModule
   ],
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, PermissionGrantComponent, RoleDetailComponent, RoleComponent],
 })
 export class AdminModule {}

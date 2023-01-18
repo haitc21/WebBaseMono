@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   protected localizationService: LocalizationService;
   protected route: ActivatedRoute;
 
-  validation_messages = {
+  validationMessages = {
     username: [
       { type: 'required', message: 'Tên tài khoàn không được để trống!' },
       {

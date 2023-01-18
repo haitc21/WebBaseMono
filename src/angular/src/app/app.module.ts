@@ -28,6 +28,7 @@ import(`@/../@angular/common/locales/vi.mjs`).then(m => storeLocaleData(m.defaul
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { UtilityService } from './shared/services';
 
 @NgModule({
   imports: [
@@ -68,6 +69,7 @@ import { DialogService } from 'primeng/dynamicdialog';
     APP_ROUTE_PROVIDER,
     ConfirmationService,
     DialogService,
+    UtilityService
   ],
   bootstrap: [AppComponent],
 })

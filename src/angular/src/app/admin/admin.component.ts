@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
           {
             title: 'Vai trò',
             icon: 'grid-outline',
-            link: '/admin/roles',
+            link: '/admin/role',
           },
           {
             title: 'Người dùng',

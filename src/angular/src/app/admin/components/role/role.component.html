@@ -4,9 +4,6 @@
     <div class="tow">
       <div class="col-6">
         <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="CREATE"
           pButton
           type="button"
           label="Thêm"
@@ -15,9 +12,6 @@
           class="ml-1 p-button-info"
         ></button>
         <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="DELETE"
           pButton
           type="button"
           label="Xóa"
@@ -27,9 +21,6 @@
           (click)="deleteItems()"
         ></button>
         <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="UPDATE"
           pButton
           type="button"
           label="Sửa"
@@ -71,7 +62,7 @@
           </th>
           <th>Tên</th>
           <th>Mô tả</th>
-          <th></th>
+          <th>Thao tác</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -83,7 +74,7 @@
           <td>{{ row.name }}</td>
           <td>{{ row.description }}</td>
           <td>
-            <button pButton (click)="showPermissionModal(row.id, row.name)">Phân quyền</button>
+            <!-- <button pButton (click)="showPermissionModal(row.id, row.name)">Phân quyền</button> -->
           </td>
         </tr>
       </ng-template>
@@ -108,4 +99,3 @@
     </p-blockUI>
   </p-panel>
 </div>
-

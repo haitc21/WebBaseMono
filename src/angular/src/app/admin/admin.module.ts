@@ -31,7 +31,6 @@ import { RoleDetailComponent } from './components/role/role-detail.component';
 import { RoleComponent } from './components/role/role.component';
 import { CoreModule } from '@abp/ng.core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
@@ -43,9 +42,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbMenuModule,
     DashboardModule,
     MiscellaneousModule,
-
     NbCardModule,
-    Ng2SmartTableModule,
 
     CalendarModule,
     PanelModule,

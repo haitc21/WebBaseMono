@@ -29,7 +29,7 @@ dotnet tool install -g Volo.Abp.Cli
 ## Môi trường dev
 I. Chạy FE:
 ```
-cd scr/angular
+cd scr/client
 yarn
 ng s -o --port 4201
 ```
@@ -59,3 +59,9 @@ redis-cli flushall
 ```
 Dùng công cụ AnotherRedisDesktopManager
 ![Admin-preview](image/DeketeRedusCache.png)
+
+# Generate proxy Frontend
+'''
+cd scr/client
+abp generate-proxy -t ng
+'''

@@ -1,11 +1,9 @@
-<ng-container *ngIf="entityControl.invalid && entityControl.dirty">
+<!-- <ng-container *ngIf="entityControl.invalid && entityControl.dirty"> -->
   <ng-container *ngFor="let validation of validationMessages">
-    <div class="item validation-msg" *ngIf="entityControl.errors[validation.type]">
-      <div class="color bg-status-warning">
-        <p>
-          {{ validation.message }}
-        </p>
-      </div>
-    </div>
+    <p-message
+      severity="error"
+      [text]="validation.message"
+      [@errorState]="entityControl.invalid && entityControl.dirty && entityControl.errors[validation.type] ? 'visible' : 'hidden'"
+    ></p-message>
   </ng-container>
-</ng-container>
+<!-- </ng-container> -->

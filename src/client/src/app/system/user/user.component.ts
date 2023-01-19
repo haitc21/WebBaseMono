@@ -55,9 +55,12 @@ export class UserComponent implements OnInit, OnDestroy {
 
   loadData(selectionId = null) {
     this.toggleBlockUI(true);
-    this.filter.filter = this.keyword;
-    this.filter.skipCount = this.skipCount;
-    this.filter.maxResultCount = this.maxResultCount;
+    debugger;
+    this.filter = {
+      filter: this.keyword,
+      skipCount: this.skipCount,
+      maxResultCount: this.maxResultCount,
+    };
     this.userService
       .getList(this.filter)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -194,7 +197,7 @@ export class UserComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 500);
+      }, 100);
     }
   }
 }

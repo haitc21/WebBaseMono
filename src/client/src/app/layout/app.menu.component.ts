@@ -18,23 +18,6 @@ export class AppMenuComponent implements OnInit {
         items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }],
       },
       {
-        label: 'Sản phẩm',
-        items: [
-          {
-            label: 'Danh sách sản phẩm',
-            icon: 'pi pi-fw pi-circle',
-            routerLink: ['/catalog/product'],
-            permission: 'TeduEcomAdminCatalog.Product',
-          },
-          {
-            label: 'Danh sách thuộc tính',
-            icon: 'pi pi-fw pi-circle',
-            routerLink: ['/catalog/attribute'],
-            permission: 'TeduEcomAdminCatalog.Attribute',
-          },
-        ],
-      },
-      {
         label: 'Hệ thống',
         items: [
           {

@@ -170,7 +170,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 500);
+      }, 100);
     }
   }
 }

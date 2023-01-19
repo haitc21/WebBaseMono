@@ -7,7 +7,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TeduEcommerce": {
+    "WebBase": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/TeduEcommerce",
+            "outputPath": "dist/WebBase",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -139,10 +139,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "TeduEcommerce:build:production"
+              "browserTarget": "WebBase:build:production"
             },
             "development": {
-              "browserTarget": "TeduEcommerce:build:development"
+              "browserTarget": "WebBase:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -150,7 +150,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TeduEcommerce:build"
+            "browserTarget": "WebBase:build"
           }
         },
         "test": {
@@ -175,5 +175,5 @@
       }
     }
   },
-  "defaultProject": "TeduEcommerce"
+  "defaultProject": "WebBase"
 }

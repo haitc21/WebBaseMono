@@ -12,7 +12,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
   templateUrl: './login.component.html',
   styles: [
     `
-      :host ::ng-deep .p-password input {
+      #inputPassword {
         width: 100%;
         padding: 1rem;
       }
@@ -80,17 +80,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   onSubmit() {
-    debugger;
     if (this.form.invalid) return;
     this.toggleBlockUI(true);
 
     const { username, password, rememberMe } = this.form.value;
     const redirectUrl = this.redirectUrl;
-    const loginParams = { username, password, rememberMe };
+    const loginParams = { username, password, rememberMe, redirectUrl };
     this.authService.login(loginParams).subscribe(
       () => {
         this.toggleBlockUI(false);
-        this.router.navigate(['']);
+        this.router.navigate([redirectUrl]);
       },
       err => {
         let errorMsg =
@@ -118,7 +117,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 500);
+      }, 100);
     }
   }
 

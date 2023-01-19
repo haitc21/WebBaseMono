@@ -11,7 +11,7 @@ import { AuthService, CoreModule } from '@abp/ng.core';
 import { MessageService } from 'primeng/api';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { WebBaseSharedModule } from 'src/app/shared/modules/tedu-shared.module';
+import { WebBaseSharedModule } from 'src/app/shared/modules/webbase-shared.module';
 
 @NgModule({
   imports: [

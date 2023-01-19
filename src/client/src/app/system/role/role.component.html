@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-  <p-panel #pnl [style]="{ 'margin-bottom': '10px' }">
+  <p-panel #pnl>
     <p-header> Quản lý vai trò </p-header>
 
     <div class="card">
@@ -10,7 +10,7 @@
             pRipple
             label="Thêm"
             icon="pi pi-plus"
-            class="p-button-success p-mr-2"
+            class="p-button-success mr-2"
             (click)="showAddModal()"
           ></button>
           <button
@@ -22,6 +22,9 @@
             (click)="deleteItems()"
             [disabled]="!selectedItems || !selectedItems.length"
           ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input
@@ -85,9 +88,17 @@
                 pButton
                 pRipple
                 icon="pi pi-pencil"
-                class="p-button-rounded p-button-success p-mr-2"
+                class="p-button-rounded p-button-success mr-2"
                 (click)="showEditModal(row)"
               ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-info mr-2"
+                (click)="showPermissionModal(row.id, row.name)"
+              ></button>
+              
               <button
                 pButton
                 pRipple

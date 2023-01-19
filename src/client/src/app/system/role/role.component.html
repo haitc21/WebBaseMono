@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <p-panel #pnl [style]="{ 'margin-bottom': '10px' }">
-    <p-header> Quản lý quyền </p-header>
+    <p-header> Quản lý vai trò </p-header>
 
     <div class="card">
       <p-toolbar styleClass="p-mb-4">
@@ -51,8 +51,8 @@
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
             <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon></th>
-            <th pSortableColumn="isDefault">Mặc định</th>
             <th pSortableColumn="isPublic">Công khai</th>
+            <th pSortableColumn="isDefault">Mặc định</th>
             <th pSortableColumn="rating">Reviews</th>
             <th>Thao tác</th>
           </tr>
@@ -66,16 +66,16 @@
             <td>
               <p-tag
                 styleClass="mr-2"
-                [severity]="row.isDefault == true ? 'info' : 'warning'"
-                [value]="row.isDefault"
+                [severity]="row.isPublic == true ? 'info' : 'warning'"
+                [value]="row.isPublic"
               >
               </p-tag>
             </td>
             <td>
               <p-tag
                 styleClass="mr-2"
-                [severity]="row.isPublic == true ? 'info' : 'warning'"
-                [value]="row.isPublic"
+                [severity]="row.isDefault == true ? 'info' : 'warning'"
+                [value]="row.isDefault"
               >
               </p-tag>
             </td>

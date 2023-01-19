@@ -57,17 +57,20 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
   // Validate
   validationMessages = {
     name: [
-      { type: 'required', message: 'Bạn phải nhập tên nhóm' },
+      { type: 'required', message: 'Tên vai trò không được để trống!' },
       { type: 'minlength', message: 'Bạn phải nhập ít nhất 3 kí tự' },
       { type: 'maxlength', message: 'Bạn không được nhập quá 255 kí tự' },
     ],
-    description: [{ type: 'required', message: 'Bạn phải mô tả' }],
+    description: [
+      { type: 'required', message: 'Bạn phải mô tả' },
+      { type: 'minlength', message: 'Bạn phải nhập ít nhất 3 kí tự' },
+    ],
   };
 
   get formControls() {
     return this.form.controls;
   }
-  
+
   loadDetail(id: any) {
     this.toggleBlockUI(true);
     this.roleService
@@ -120,7 +123,12 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
           Validators.minLength(3),
         ])
       ),
-      description: new FormControl(this.selectedEntity.description || null),
+      description: new FormControl(
+        this.selectedEntity.description || null,
+        Validators.compose([Validators.required, Validators.maxLength(500)])
+      ),
+      isPublic: new FormControl(this.selectedEntity.isPublic || false),
+      isDefault: new FormControl(this.selectedEntity.isDefault || false),
     });
   }
 

@@ -73,8 +73,8 @@ export class RoleComponent implements OnInit, OnDestroy {
 
   showAddModal() {
     const ref = this.dialogService.open(RoleDetailComponent, {
-      header: 'Thêm mới quyền',
-      width: '70%',
+      header: 'Thêm vai trò',
+      width: '50%',
     });
 
     ref.onClose.subscribe((data: RoleDto) => {
@@ -101,8 +101,8 @@ export class RoleComponent implements OnInit, OnDestroy {
       data: {
         id: row.id,
       },
-      header: 'Cập nhật quyền',
-      width: '70%',
+      header: 'Cập nhật vai trò',
+      width: '50%',
     });
 
     ref.onClose.subscribe((data: RoleDto) => {
@@ -163,7 +163,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     });
   }
   deleteRow(item) {
-    if (item) {
+    if (!item) {
       this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
       return;
     }

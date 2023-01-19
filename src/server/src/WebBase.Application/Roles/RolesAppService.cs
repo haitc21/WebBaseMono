@@ -98,10 +98,7 @@ public class RolesAppService : CrudAppService<
 
     public async override Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
     {
-        var role = new IdentityRole(
-           GuidGenerator.Create(),
-           input.Name
-       )
+        var role = new IdentityRole(GuidGenerator.Create(), input.Name)
         {
             IsDefault = input.IsDefault,
             IsPublic = input.IsPublic
@@ -143,7 +140,7 @@ public class RolesAppService : CrudAppService<
             Groups = new List<PermissionGroupDto>()
         };
 
-        foreach (var group in PermissionDefinitionManager.GetGroups().Where(x=>x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("TeduEcomAdmin")))
+        foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("TeduEcomAdmin")))
         {
             var groupDto = CreatePermissionGroupDto(group);
 
@@ -223,7 +220,7 @@ public class RolesAppService : CrudAppService<
 
     public virtual async Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input)
     {
-       // await CheckProviderPolicy(providerName);
+        // await CheckProviderPolicy(providerName);
 
         foreach (var permissionDto in input.Permissions)
         {

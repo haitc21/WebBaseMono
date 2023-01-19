@@ -45,7 +45,7 @@
               pInputText
               autofocus
               class="w-full mb-3"
-              style="padding: 1rem;"
+              style="padding: 1rem"
             />
             <app-validation-message
               [entityControl]="formControls.username"
@@ -70,14 +70,23 @@
               [validationMessages]="validationMessages.password"
             >
             </app-validation-message>
-            <button
-              pButton
-              pRipple
-              (click)="onSubmit()"
-              label="Đăng nhập"
-              class="w-full p-3 text-xl"
-            ></button>
           </div>
+          
+          <div class="field col-12 md:col-12">
+            <p-checkbox
+              binary="true"
+              label="Ghi nhớ tài khoản"
+              formControlName="rememberMe"
+            ></p-checkbox>
+          </div>
+
+          <button
+            pButton
+            pRipple
+            (click)="onSubmit()"
+            label="Đăng nhập"
+            class="w-full p-3 text-xl"
+          ></button>
         </form>
         <p-blockUI [blocked]="blockedPanel">
           <p-progressSpinner></p-progressSpinner>

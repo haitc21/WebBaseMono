@@ -1,103 +1,114 @@
 <div class="animated fadeIn">
   <p-panel #pnl [style]="{ 'margin-bottom': '10px' }">
     <p-header> Quản lý quyền </p-header>
-    <div class="grid">
-      <div class="col-6">
-        <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="CREATE"
-          pButton
-          type="button"
-          label="Thêm"
-          icon="fa fa-plus"
-          (click)="showAddModal()"
-          class="ml-1 p-button-info"
-        ></button>
-        <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="DELETE"
-          pButton
-          type="button"
-          label="Xóa"
-          icon="fa fa-trash"
-          class="ml-1 p-button-danger"
-          *ngIf="selectedItems.length > 0"
-          (click)="deleteItems()"
-        ></button>
-        <button
-          appPermission
-          appFunction="LEARNING_COURSE_CATEGORY"
-          appAction="UPDATE"
-          pButton
-          type="button"
-          label="Sửa"
-          icon="fa fa-edit"
-          class="ml-1 p-button-help"
-          *ngIf="selectedItems.length == 1"
-          (click)="showEditModal()"
-        ></button>
-      </div>
-      <div class="col-6">
-        <div class="formgroup-inline">
-          <div class="field">
+
+    <div class="card">
+      <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+          <button
+            pButton
+            pRipple
+            label="Thêm"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="showAddModal()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            [label]="Delete"
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="deleteItems()"
+            [disabled]="!selectedItems || !selectedItems.length"
+          ></button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
             <input
-              id="txtKeyword"
               pInputText
+              type="text"
               (keyup.enter)="loadData()"
               [(ngModel)]="keyword"
-              placeholder="Nhập tên nhóm..."
-              type="text"
+              placeholder="Nhập tên vai trò..."
             />
-          </div>
-          <button type="button" pButton (click)="loadData()">Tìm</button>
-        </div>
-      </div>
-    </div>
-    <p-table
-      #dt
-      [value]="items"
-      selectionMode="multiple"
-      dataKey="id"
-      [(selection)]="selectedItems"
-      [metaKeySelection]="true"
-      [responsive]="true"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 10px">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
-          <th>Tên</th>
-          <th>Mô tả</th>
-          <th></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-row>
-        <tr [pSelectableRow]="row">
-          <td style="width: 10px">
-            <span class="ui-column-title"></span>
-            <p-tableCheckbox [value]="row"></p-tableCheckbox>
-          </td>
-          <td>{{ row.name }}</td>
-          <td>{{ row.description }}</td>
-          <td>
-            <button pButton (click)="showPermissionModal(row.id, row.name)">Phân quyền</button>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="summary">
-        <div style="text-align: left">Tổng số: {{ totalCount | number }}</div>
-      </ng-template>
-    </p-table>
+          </span>
+        </ng-template>
+      </p-toolbar>
 
-    <p-paginator
-      [rows]="maxResultCount"
-      [totalRecords]="totalCount"
-      (onPageChange)="pageChanged($event)"
-      [rowsPerPageOptions]="[10, 20, 50, 100]"
-    ></p-paginator>
+      <p-table
+        #dt
+        [value]="items"
+        [rows]="10"
+        [paginator]="false"
+        [globalFilterFields]="['name']"
+        [(selection)]="selectedItems"
+        [rowHover]="true"
+        dataKey="id"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="isDefault">Mặc định</th>
+            <th pSortableColumn="isPublic">Công khai</th>
+            <th pSortableColumn="rating">Reviews</th>
+            <th>Thao tác</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="row"></p-tableCheckbox>
+            </td>
+            <td>{{ row.name }}</td>
+            <td>
+              <p-tag
+                styleClass="mr-2"
+                [severity]="row.isDefault == true ? 'info' : 'warning'"
+                [value]="row.isDefault"
+              >
+              </p-tag>
+            </td>
+            <td>
+              <p-tag
+                styleClass="mr-2"
+                [severity]="row.isPublic == true ? 'info' : 'warning'"
+                [value]="row.isPublic"
+              >
+              </p-tag>
+            </td>
+            <td>{{ row.description }}</td>
+            <td>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success p-mr-2"
+                (click)="showEditModal(row)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteRow(row)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">Tổng số: {{ totalCount | number }}</div>
+          <p-paginator
+            [rows]="maxResultCount"
+            [totalRecords]="totalCount"
+            (onPageChange)="pageChanged($event)"
+            [rowsPerPageOptions]="[10, 20, 50, 100]"
+          ></p-paginator>
+        </ng-template>
+      </p-table>
+    </div>
 
     <p-blockUI [target]="pnl" [blocked]="blockedPanel">
       <p-progressSpinner

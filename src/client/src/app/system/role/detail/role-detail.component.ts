@@ -6,7 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
-  templateUrl: 'role-detail.component.html',
+  templateUrl: './role-detail.component.html',
 })
 export class RoleDetailComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();

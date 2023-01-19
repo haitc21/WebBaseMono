@@ -6,8 +6,8 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { PermissionGrantComponent } from './permission-grant.component';
-import { RoleDetailComponent } from './role-detail.component';
+import { PermissionGrantComponent } from './permission-grant/permission-grant.component';
+import { RoleDetailComponent } from './detail/role-detail.component';
 
 @Component({
   selector: 'app-role',
@@ -92,15 +92,14 @@ export class RoleComponent implements OnInit, OnDestroy {
     this.loadData();
   }
 
-  showEditModal() {
-    if (this.selectedItems.length == 0) {
+  showEditModal(row: any) {
+    if (!row) {
       this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
       return;
     }
-    var id = this.selectedItems[0].id;
     const ref = this.dialogService.open(RoleDetailComponent, {
       data: {
-        id: id,
+        id: row.id,
       },
       header: 'Cập nhật quyền',
       width: '70%',
@@ -148,7 +147,6 @@ export class RoleComponent implements OnInit, OnDestroy {
       },
     });
   }
-
   deleteItemsConfirm(ids: any[]) {
     this.toggleBlockUI(true);
 
@@ -164,6 +162,35 @@ export class RoleComponent implements OnInit, OnDestroy {
       },
     });
   }
+  deleteRow(item) {
+    if (item) {
+      this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
+      return;
+    }
+    this.confirmationService.confirm({
+      message: MessageConstants.CONFIRM_DELETE_MSG,
+      accept: () => {
+        this.deleteRowConfirm(item.id);
+      },
+    });
+  }
+  deleteRowConfirm(id) {
+    this.toggleBlockUI(true);
+
+    this.roleService.delete(id).subscribe({
+      next: () => {
+        this.notificationService.showSuccess(MessageConstants.DELETED_OK_MSG);
+        this.loadData();
+        this.selectedItems = [];
+        this.toggleBlockUI(false);
+      },
+      error: () => {
+        this.toggleBlockUI(false);
+      },
+    });
+  }
+
+
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {
       this.blockedPanel = true;

@@ -19,15 +19,17 @@ import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
 import { RoleComponent } from './role/role.component';
-import { RoleDetailComponent } from './role/role-detail.component';
-import { PermissionGrantComponent } from './role/permission-grant.component';
+import { RoleDetailComponent } from './role/detail/role-detail.component';
+import { PermissionGrantComponent } from './role/permission-grant/permission-grant.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user/user-detail.component';
 import { SystemRoutingModule } from './system-routing.module';
 import { RoleAssignComponent } from './user/role-assign.component';
-import {PickListModule} from 'primeng/picklist';
+import { PickListModule } from 'primeng/picklist';
 import { SetPasswordComponent } from './user/set-password.component';
-import {KeyFilterModule} from 'primeng/keyfilter';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import {ToolbarModule} from 'primeng/toolbar';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     UserComponent,
     UserDetailComponent,
     RoleAssignComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
   ],
   imports: [
     SharedModule,
@@ -61,14 +63,16 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     CalendarModule,
     SystemRoutingModule,
     PickListModule,
-    KeyFilterModule
+    KeyFilterModule,
+    ToolbarModule,
+    TagModule
   ],
   entryComponents: [
     RoleDetailComponent,
     PermissionGrantComponent,
     UserDetailComponent,
     RoleAssignComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
   ],
 })
 export class SystemModule {}

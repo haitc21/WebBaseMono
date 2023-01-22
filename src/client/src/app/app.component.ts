@@ -28,7 +28,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
-    document.documentElement.style.fontSize = '14px';
+    document.documentElement.style.fontSize = '0.8rem';
     if (!this.oAuthService.hasValidAccessToken()) {
       this.router.navigate([LOGIN_URL]);
     }

@@ -46,12 +46,12 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildForm();
-    this.loadDetail(this.config.data.name, 'R');
+    this.loadDetail(this.config.data.providerName, this.config.data.providerKey);
     this.saveBtnName = 'Cập nhật';
     this.closeBtnName = 'Hủy';
   }
 
-  loadDetail(providerKey: string, providerName: string) {
+  loadDetail(providerName: string, providerKey: string) {
     this.toggleBlockUI(true);
     this.roleService
       .getPermissions(providerName, providerKey)

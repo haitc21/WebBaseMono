@@ -20,7 +20,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
 import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/detail/role-detail.component';
-import { PermissionGrantComponent } from './role/permission-grant/permission-grant.component';
+import { PermissionGrantComponent } from './permission-grant/permission-grant.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user/user-detail.component';
 import { SystemRoutingModule } from './system-routing.module';

@@ -6,8 +6,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { PermissionGrantComponent } from './permission-grant/permission-grant.component';
+import { PermissionGrantComponent } from '../permission-grant/permission-grant.component';
 import { RoleDetailComponent } from './detail/role-detail.component';
+import { DIALOG_MD, DIALOG_SM } from 'src/app/shared/constants/sizes.const';
+import { ROLE_PROVIDER } from 'src/app/shared/constants/provider-namex.const';
 
 @Component({
   selector: 'app-role',
@@ -74,7 +76,7 @@ export class RoleComponent implements OnInit, OnDestroy {
   showAddModal() {
     const ref = this.dialogService.open(RoleDetailComponent, {
       header: 'Thêm vai trò',
-      width: '50%',
+      width: DIALOG_SM,
     });
 
     ref.onClose.subscribe((data: RoleDto) => {
@@ -102,7 +104,7 @@ export class RoleComponent implements OnInit, OnDestroy {
         id: row.id,
       },
       header: 'Cập nhật vai trò',
-      width: '50%',
+      width: DIALOG_SM,
     });
 
     ref.onClose.subscribe((data: RoleDto) => {
@@ -117,10 +119,11 @@ export class RoleComponent implements OnInit, OnDestroy {
     const ref = this.dialogService.open(PermissionGrantComponent, {
       data: {
         id: id,
-        name: name,
+        providerKey: name,
+        providerName: ROLE_PROVIDER
       },
       header: name,
-      width: '70%',
+      width: DIALOG_MD,
     });
 
     ref.onClose.subscribe((data: RoleDto) => {

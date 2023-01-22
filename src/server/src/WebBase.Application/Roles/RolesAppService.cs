@@ -140,7 +140,7 @@ public class RolesAppService : CrudAppService<
             Groups = new List<PermissionGroupDto>()
         };
 
-        foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("TeduEcomAdmin")))
+        foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("WebBase")))
         {
             var groupDto = CreatePermissionGroupDto(group);
 

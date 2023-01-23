@@ -30,6 +30,7 @@ import { SetPasswordComponent } from './user/set-password.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import {ToolbarModule} from 'primeng/toolbar';
 import { TagModule } from 'primeng/tag';
+import {ListboxModule} from 'primeng/listbox';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { TagModule } from 'primeng/tag';
     PickListModule,
     KeyFilterModule,
     ToolbarModule,
-    TagModule
+    TagModule,
+    ListboxModule
   ],
   entryComponents: [
     RoleDetailComponent,

@@ -120,17 +120,17 @@ export class RoleComponent implements OnInit, OnDestroy {
       data: {
         id: id,
         providerKey: name,
-        providerName: ROLE_PROVIDER
+        providerName: ROLE_PROVIDER,
       },
       header: name,
-      width: DIALOG_MD,
+      width: DIALOG_SM,
     });
 
-    ref.onClose.subscribe((data: RoleDto) => {
+    ref.onClose.subscribe((data: any) => {
       if (data) {
         this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
         this.selectedItems = [];
-        this.loadData(data.id);
+        this.loadData();
       }
     });
   }
@@ -192,7 +192,6 @@ export class RoleComponent implements OnInit, OnDestroy {
       },
     });
   }
-
 
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {

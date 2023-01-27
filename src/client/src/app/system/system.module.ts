@@ -28,9 +28,10 @@ import { RoleAssignComponent } from './user/role-assign.component';
 import { PickListModule } from 'primeng/picklist';
 import { SetPasswordComponent } from './user/set-password.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import {ToolbarModule} from 'primeng/toolbar';
+import { ToolbarModule } from 'primeng/toolbar';
 import { TagModule } from 'primeng/tag';
-import {ListboxModule} from 'primeng/listbox';
+import { ListboxModule } from 'primeng/listbox';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {ListboxModule} from 'primeng/listbox';
     KeyFilterModule,
     ToolbarModule,
     TagModule,
-    ListboxModule
+    ListboxModule,
+    TooltipModule
   ],
   entryComponents: [
     RoleDetailComponent,

@@ -1,4 +1,4 @@
-<p-panel #pnlDetail [header]="pnlHeader" [toggleable]="true" [collapsed]="false">
+<p-panel #pnlPm>
   <p-listbox
     [options]="groupedPermisssions"
     [group]="true"
@@ -7,6 +7,7 @@
     [checkbox]="true"
     [filter]="true"
     [multiple]="true"
+    filterPlaceHolder="Tên quyền"
     [listStyle]="{ 'max-height': '250px' }"
   >
     <ng-template let-group pTemplate="group">
@@ -16,12 +17,20 @@
     </ng-template>
   </p-listbox>
   <ng-template pTemplate="footer">
-    <button type="submit" class="btn btn-primary" (click)="saveData()">
-      {{ saveBtnName }}
+    <button
+      pButton
+      pRipples
+      type="submit"
+      [label]="saveBtnName"
+      class="btn btn-primary"
+      icon="pi pi-check"
+      (click)="saveData()"
+    >
+      >
     </button>
   </ng-template>
 
-  <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+  <p-blockUI [target]="pnlPm" [blocked]="blockedPanelDetail">
     <p-progressSpinner
       [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
       strokeWidth="2"

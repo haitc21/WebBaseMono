@@ -82,7 +82,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   showAddModal() {
     const ref = this.dialogService.open(UserDetailComponent, {
-      header: 'Thêm mới người dùng',
+      header: 'Tạo mới người dùng',
       width: '70%',
     });
 

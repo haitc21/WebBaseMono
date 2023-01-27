@@ -7,7 +7,7 @@ export class MessageConstants {
     public static CONFIRM_SET_NOT_IS_HOME_MSG = 'Bạn có chắc muốn bỏ hiển thị bản ghi này tại trang chủ?';
     public static CONFIRM_PUBLISH_POST='Bạn có chắc muốn xuất bản bài viết này?';
     public static LOGIN_AGAIN_MSG = 'Bạn hết phiên đăng nhập. Mời đăng nhập lại.'
-    public static CREATED_OK_MSG = 'Thêm mới thành công';
+    public static CREATED_OK_MSG = 'Tạo mới thành công';
     public static UPDATED_OK_MSG = 'Cập nhật thành công';
     public static DELETED_OK_MSG = 'Xóa thành công';
     public static SET_DEFAULT_OK_MSG = 'Đặt mặc định thành công';

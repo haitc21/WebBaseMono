@@ -10,6 +10,7 @@ import { PermissionGrantComponent } from '../permission-grant/permission-grant.c
 import { RoleDetailComponent } from './detail/role-detail.component';
 import { DIALOG_MD, DIALOG_SM } from 'src/app/shared/constants/sizes.const';
 import { ROLE_PROVIDER } from 'src/app/shared/constants/provider-namex.const';
+import { Actions } from 'src/app/shared/enums/actions.enum';
 
 @Component({
   selector: 'app-role',
@@ -25,6 +26,7 @@ export class RoleComponent implements OnInit, OnDestroy {
   public skipCount: number = 0;
   public maxResultCount: number = 10;
   public totalCount: number;
+  Actions = Actions;
 
   //Business variables
   public items: RoleDto[];
@@ -75,7 +77,7 @@ export class RoleComponent implements OnInit, OnDestroy {
 
   showAddModal() {
     const ref = this.dialogService.open(RoleDetailComponent, {
-      header: 'Thêm vai trò',
+      header: 'Tạo vai trò',
       width: DIALOG_SM,
     });
 
@@ -122,7 +124,7 @@ export class RoleComponent implements OnInit, OnDestroy {
         providerKey: name,
         providerName: ROLE_PROVIDER,
       },
-      header: name,
+      header: `Phân quyền cho vai trò '${name}'`,
       width: DIALOG_SM,
     });
 

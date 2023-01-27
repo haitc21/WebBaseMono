@@ -55,9 +55,6 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
     this.loadDetail(this.config.data.providerName, this.config.data.providerKey);
     this.saveBtnName = 'Cập nhật';
     this.closeBtnName = 'Hủy';
-    this.pnlHeader =
-      'Phân quyền cho ' +
-      (this.config.data.providerName == ROLE_PROVIDER ? 'vai trò' : 'người dùng');
   }
 
   loadDetail(providerName: string, providerKey: string) {

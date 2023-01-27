@@ -56,7 +56,7 @@
           <th pSortableColumn="name">Tên</th>
           <th pSortableColumn="isPublic">Công khai</th>
           <th pSortableColumn="isDefault">Mặc định</th>
-          <th>Thao tác</th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -68,16 +68,16 @@
           <td>
             <p-tag
               styleClass="mr-1"
-              [severity]="row.isPublic == true ? 'info' : 'warning'"
-              [value]="row.isPublic"
+              [severity]="row.isPublic ? 'info' : 'warning'"
+              [value]="row.isPublic ? 'Có' : 'Không'"
             >
             </p-tag>
           </td>
           <td>
             <p-tag
               styleClass="mr-1"
-              [severity]="row.isDefault == true ? 'info' : 'warning'"
-              [value]="row.isDefault"
+              [severity]="row.isDefault ? 'info' : 'warning'"
+              [value]="row.isDefault ? 'Có' : 'Không'"
             >
             </p-tag>
           </td>
@@ -86,7 +86,7 @@
               pButton
               pRipple
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-success mr-1"
+              class="p-button-rounded p-button-primary mr-1"
               [pTooltip]="Actions.UPDATE"
               tooltipPosition="top"
               (click)="showEditModal(row)"
@@ -95,10 +95,10 @@
               pButton
               pRipple
               icon="pi pi-wrench"
-              class="p-button-rounded p-button-info mr-1"
-              [pTooltip]="Actions.MANAGE_PERMISSIONs"
+              class="p-button-rounded p-button-secondary mr-1"
+              [pTooltip]="Actions.MANAGE_PERMISSIONS"
               tooltipPosition="top"
-              (click)="showPermissionModal(row.id, row.name)"
+              (click)="showPermissionModal(row)"
             ></button>
 
             <button

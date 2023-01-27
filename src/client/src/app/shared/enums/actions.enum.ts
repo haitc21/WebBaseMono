@@ -3,7 +3,9 @@ export enum Actions {
   UPDATE = 'Sửa',
   DELETE = 'Xóa',
   APPROVE = 'Phê duyệt',
-  MANAGE_PERMISSIONs = 'Phân quyền',
+  MANAGE_PERMISSIONS = 'Phân quyền',
   CANCEL = "Hủy",
-  CLOSE = "hủy"
+  CLOSE = "hủy",
+  SET_PASSWORD = "Đặt mật khẩu",
+  ASSIGN_ROLE = "qQuản lý vai trò"
 }

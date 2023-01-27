@@ -49,7 +49,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     this.loadData();
   }
 
-  loadData(selectionId = null) {
+  loadData() {
     this.toggleBlockUI(true);
 
     this.roleService
@@ -63,10 +63,6 @@ export class RoleComponent implements OnInit, OnDestroy {
         next: (response: PagedResultDto<RoleDto>) => {
           this.items = response.items;
           this.totalCount = response.totalCount;
-          if (selectionId != null && this.items.length > 0) {
-            this.selectedItems = this.items.filter(x => x.id == selectionId);
-          }
-
           this.toggleBlockUI(false);
         },
         error: () => {
@@ -105,7 +101,7 @@ export class RoleComponent implements OnInit, OnDestroy {
       data: {
         id: row.id,
       },
-      header: 'Cập nhật vai trò',
+      header: `Cập nhật vai trò '${row.name}'`,
       width: DIALOG_SM,
     });
 
@@ -113,18 +109,21 @@ export class RoleComponent implements OnInit, OnDestroy {
       if (data) {
         this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
         this.selectedItems = [];
-        this.loadData(data.id);
+        this.loadData();
       }
     });
   }
-  showPermissionModal(id: string, name: string) {
+  showPermissionModal(row) {
+    if (!row) {
+      this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
+      return;
+    }
     const ref = this.dialogService.open(PermissionGrantComponent, {
       data: {
-        id: id,
-        providerKey: name,
+        providerKey: row.name,
         providerName: ROLE_PROVIDER,
       },
-      header: `Phân quyền cho vai trò '${name}'`,
+      header: `Phân quyền cho vai trò '${row.name}'`,
       width: DIALOG_SM,
     });
 
@@ -167,6 +166,7 @@ export class RoleComponent implements OnInit, OnDestroy {
       },
     });
   }
+
   deleteRow(item) {
     if (!item) {
       this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
@@ -201,7 +201,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 100);
+      }, 200);
     }
   }
 }

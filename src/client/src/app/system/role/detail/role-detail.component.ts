@@ -140,7 +140,7 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.btnDisabled = false;
         this.blockedPanelDetail = false;
-      }, 100);
+      }, 200);
     }
   }
 }

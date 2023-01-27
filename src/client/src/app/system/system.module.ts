@@ -32,6 +32,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { TagModule } from 'primeng/tag';
 import { ListboxModule } from 'primeng/listbox';
 import { TooltipModule } from 'primeng/tooltip';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { TooltipModule } from 'primeng/tooltip';
     ToolbarModule,
     TagModule,
     ListboxModule,
-    TooltipModule
+    TooltipModule,
+    TieredMenuModule
   ],
   entryComponents: [
     RoleDetailComponent,

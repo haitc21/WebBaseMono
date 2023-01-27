@@ -27,7 +27,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "js-sha256",
+              "just-clone",
+              "fast-sha256",
+              "quill"
+            ],
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               {

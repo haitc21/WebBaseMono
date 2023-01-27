@@ -39,12 +39,15 @@ public class RolesAppService : CrudAppService<
     protected IPermissionDefinitionManager PermissionDefinitionManager { get; }
     protected ISimpleStateCheckerManager<PermissionDefinition> SimpleStateCheckerManager { get; }
 
+    protected IdentityUserManager UserManager { get; }
+
     public RolesAppService(IRepository<IdentityRole, Guid> repository,
         IdentityRoleManager roleManager,
         IPermissionManager permissionManager,
-    IPermissionDefinitionManager permissionDefinitionManager,
-    IOptions<PermissionManagementOptions> options,
-    ISimpleStateCheckerManager<PermissionDefinition> simpleStateCheckerManager)
+        IPermissionDefinitionManager permissionDefinitionManager,
+        IOptions<PermissionManagementOptions> options,
+        ISimpleStateCheckerManager<PermissionDefinition> simpleStateCheckerManager,
+        IdentityUserManager userManager)
         : base(repository)
     {
         RoleManager = roleManager;
@@ -52,7 +55,7 @@ public class RolesAppService : CrudAppService<
         PermissionManager = permissionManager;
         PermissionDefinitionManager = permissionDefinitionManager;
         SimpleStateCheckerManager = simpleStateCheckerManager;
-
+        UserManager = userManager;
         LocalizationResource = typeof(WebBaseResource);
 
         GetPolicyName = IdentityPermissions.Roles.Default;
@@ -129,16 +132,20 @@ public class RolesAppService : CrudAppService<
         return ObjectMapper.Map<IdentityRole, RoleDto>(role);
     }
 
-    [Authorize(IdentityPermissions.Roles.Default)]
     public async Task<GetPermissionListResultDto> GetPermissionsAsync(string providerName, string providerKey)
     {
-        //await CheckProviderPolicy(providerName);
+        await CheckProviderPolicy(providerName);
 
         var result = new GetPermissionListResultDto
         {
             EntityDisplayName = providerKey,
             Groups = new List<PermissionGroupDto>()
         };
+        if (providerName == "U")
+        {
+            var identityUser = await UserManager.GetByIdAsync(new Guid(providerKey));
+            result.EntityDisplayName = identityUser.UserName;
+        }
 
         foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("WebBase")))
         {
@@ -216,11 +223,10 @@ public class RolesAppService : CrudAppService<
         };
     }
 
-    [Authorize(IdentityPermissions.Roles.Update)]
 
     public virtual async Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input)
     {
-        // await CheckProviderPolicy(providerName);
+        await CheckProviderPolicy(providerName);
 
         foreach (var permissionDto in input.Permissions)
         {
@@ -233,7 +239,7 @@ public class RolesAppService : CrudAppService<
         var policyName = Options.ProviderPolicies.GetOrDefault(providerName);
         if (policyName.IsNullOrEmpty())
         {
-            throw new AbpException($"No policy defined to get/set permissions for the provider '{providerName}'. Use {nameof(PermissionManagementOptions)} to map the policy.");
+            throw new AbpException($"Bạn không có quyền '{providerName}'");
         }
 
         await AuthorizationService.CheckAsync(policyName);

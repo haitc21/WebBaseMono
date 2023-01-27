@@ -1,3 +1,4 @@
+import { LocalizationService } from '@abp/ng.core';
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RolesService } from '@proxy/roles';
@@ -38,7 +39,8 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private roleService: RolesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected localizationService: LocalizationService
   ) {}
 
   ngOnDestroy(): void {
@@ -69,17 +71,17 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
           console.log(response);
           
           this.groups = response.groups;
-          this.groups.forEach(element => {
+          this.groups.forEach(grPm => {
             let gr = {
-              label: element.displayName,
-              value: element.name,
+              label: grPm.displayName,
+              value: grPm.name,
               items: [],
             };
-            element.permissions.forEach(permission => {
-              this.permissions.push(permission);
+            grPm.permissions.forEach(pm => {
+              this.permissions.push(pm);
               gr.items.push({
-                label: permission.displayName + ' ' + permission.name,
-                value: permission.name,
+                label: grPm.name != 'AbpIdentity' ? pm.displayName : this.localizationService.instant(`::Permission:${pm.name}`),
+                value: pm.name,
               });
             });
             grs.push(gr);

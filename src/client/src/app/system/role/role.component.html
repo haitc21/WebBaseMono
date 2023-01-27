@@ -7,7 +7,7 @@
           pRipple
           [label]="Actions.CREATE"
           icon="pi pi-plus"
-          class="p-button-success mr-1"
+          class="p-button-success p-button-sm mr-1"
           [pTooltip]="Actions.CREATE"
           tooltipPosition="top"
           (click)="showAddModal()"
@@ -17,7 +17,7 @@
           pRipple
           [label]="Delete"
           icon="pi pi-trash"
-          class="p-button-danger"
+          class="p-button-danger p-button-sm"
           [pTooltip]="Actions.DELETE"
           tooltipPosition="top"
           (click)="deleteItems()"
@@ -114,11 +114,13 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">Tổng số: {{ totalCount | number }}</div>
         <p-paginator
           [rows]="maxResultCount"
           [totalRecords]="totalCount"
+          [showCurrentPageReport]="true"
+          [showJumpToPageInput]="true"
           (onPageChange)="pageChanged($event)"
+          currentPageReportTemplate="{totalRecords} bản ghi, {currentPage} trang"
           [rowsPerPageOptions]="[10, 20, 50, 100]"
         ></p-paginator>
       </ng-template>

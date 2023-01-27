@@ -5,3 +5,9 @@ $gutter: 1rem; //for primeflex grid system
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeflex/primeflex.scss";
 @import "../node_modules/primeicons/primeicons.css";
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: #7070e8;
+    border-color: red;
+    color: #EEF2FF;
+}

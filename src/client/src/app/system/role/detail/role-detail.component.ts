@@ -16,7 +16,6 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public title: string;
   public btnDisabled = false;
-  public saveBtnName: string;
   public closeBtnName: string;
   selectedEntity = {} as RoleDto;
 
@@ -46,11 +45,6 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
     this.buildForm();
     if (this.utilService.isEmpty(this.config.data?.id) == false) {
       this.loadDetail(this.config.data.id);
-      this.saveBtnName = 'Cập nhật';
-      this.closeBtnName = 'Hủy';
-    } else {
-      this.saveBtnName = 'Tạo';
-      this.closeBtnName = 'Đóng';
     }
   }
 

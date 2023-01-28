@@ -24,7 +24,6 @@ export class SetPasswordComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public title: string;
   public btnDisabled = false;
-  public saveBtnName: string;
   public closeBtnName: string;
   selectedEntity = {} as RoleDto;
 
@@ -47,8 +46,6 @@ export class SetPasswordComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildForm();
-    this.saveBtnName = 'Cập nhật';
-    this.closeBtnName = 'Hủy';
   }
 
   // Validate

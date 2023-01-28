@@ -25,7 +25,6 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public title: string;
   public btnDisabled = false;
-  public saveBtnName: string;
   public closeBtnName: string;
   public groups: PermissionGroupDto[] = [];
   public permissions: PermissionGrantInfoDto[] = [];
@@ -53,8 +52,6 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadDetail(this.config.data.providerName, this.config.data.providerKey);
-    this.saveBtnName = 'Cập nhật';
-    this.closeBtnName = 'Hủy';
   }
 
   loadDetail(providerName: string, providerKey: string) {

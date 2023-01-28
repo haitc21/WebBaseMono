@@ -15,7 +15,6 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
   public blockedPanelDetail: boolean = false;
   public title: string;
   public btnDisabled = false;
-  public saveBtnName: string;
   public closeBtnName: string;
   public availableRoles: string[] = [];
   public seletedRoles: string[] = [];
@@ -56,8 +55,6 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
           this.toggleBlockUI(false);
         },
       });
-    this.saveBtnName = 'Cập nhật';
-    this.closeBtnName = 'Hủy';
   }
   loadRoles() {
     this.toggleBlockUI(true);

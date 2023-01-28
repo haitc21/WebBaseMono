@@ -18,7 +18,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public title: string;
   public btnDisabled = false;
-  public saveBtnName: string;
   public roles: any[] = [];
   public countries: any[] = [];
   public provinces: any[] = [];

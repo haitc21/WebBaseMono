@@ -95,9 +95,15 @@
     <!-- ---------------------------------------------------------------------------------- -->
 
     <ng-template pTemplate="footer">
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
-        Lưu lại
-      </button>
+      <button
+        pButton
+        pRipples
+        type="submit"
+        label="Lưu"
+        class="btn btn-primary p-button-sm"
+        icon="pi pi-check"
+        [disabled]="!form.valid || btnDisabled"
+      ></button>
     </ng-template>
 
     <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">

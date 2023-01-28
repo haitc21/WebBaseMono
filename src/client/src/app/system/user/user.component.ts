@@ -17,9 +17,10 @@ import { DIALOG_MD, DIALOG_SM } from 'src/app/shared/constants/sizes.const';
 import { Actions } from 'src/app/shared/enums/actions.enum';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { PermissionGrantComponent } from '../permission-grant/permission-grant.component';
-import { RoleAssignComponent } from './role-assign.component';
-import { SetPasswordComponent } from './set-password.component';
-import { UserDetailComponent } from './user-detail.component';
+import { UserDetailComponent } from './detail/user-detail.component';
+import { RoleAssignComponent } from './role-assign/role-assign.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+
 
 @Component({
   selector: 'app-user',

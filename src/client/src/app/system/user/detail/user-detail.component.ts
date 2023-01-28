@@ -8,7 +8,7 @@ import { RoleDto, RolesService } from '@proxy/roles';
 import { IdentityUserDto } from '@abp/ng.identity/proxy';
 
 @Component({
-  templateUrl: 'user-detail.component.html',
+  templateUrl: './user-detail.component.html',
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
@@ -24,7 +24,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   public provinces: any[] = [];
   selectedEntity = {} as IdentityUserDto;
   public avatarImage;
-
+  mode: string;
   formSavedEventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -44,18 +44,18 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
   // Validate
   validationMessages = {
-    name: [{ type: 'required', message: 'Bạn phải nhập tên' }],
-    surname: [{ type: 'required', message: 'Bạn phải URL duy nhất' }],
-    email: [{ type: 'required', message: 'Bạn phải nhập email' }],
-    userName: [{ type: 'required', message: 'Bạn phải nhập tài khoản' }],
+    name: [{ type: 'required', message: 'Tên không được để trống' }],
+    surname: [{ type: 'required', message: 'Họ không được để trống' }],
+    email: [{ type: 'required', message: 'Email không được để trống' }],
+    userName: [{ type: 'required', message: 'Tên tài khoản không được để trống' }],
     password: [
-      { type: 'required', message: 'Bạn phải nhập mật khẩu' },
+      { type: 'required', message: 'Mật khẩu không được để trống' },
       {
         type: 'pattern',
         message: 'Mật khẩu ít nhất 8 ký tự, ít nhất 1 số, 1 ký tự đặc biệt, và một chữ hoa',
       },
     ],
-    phoneNumber: [{ type: 'required', message: 'Bạn phải nhập số điện thoại' }],
+    phoneNumber: [{ type: 'required', message: 'Số ĐT không được để trống' }],
   };
   get formControls() {
     return this.form.controls;
@@ -63,35 +63,14 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //Init form
     this.buildForm();
-    //Load data to form
-    var roles = this.roleService.getListAll();
+    
     this.toggleBlockUI(true);
-    forkJoin({
-      roles,
-    })
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (repsonse: any) => {
-          //Push categories to dropdown list
-          var roles = repsonse.roles as RoleDto[];
-          roles.forEach(element => {
-            this.roles.push({
-              value: element.id,
-              label: element.name,
-            });
-          });
-
-          if (this.utilService.isEmpty(this.config.data?.id) == false) {
-            this.loadFormDetails(this.config.data?.id);
-          } else {
-            this.setMode('create');
-            this.toggleBlockUI(false);
-          }
-        },
-        error: () => {
-          this.toggleBlockUI(false);
-        },
-      });
+    if (this.utilService.isEmpty(this.config.data?.id) == false) {
+      this.loadFormDetails(this.config.data?.id);
+    } else {
+      this.setMode('create');
+      this.toggleBlockUI(false);
+    }
   }
   loadFormDetails(id: string) {
     this.userService
@@ -119,7 +98,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   private saveData() {
     this.toggleBlockUI(true);
-    console.log(this.form.value);
     if (this.utilService.isEmpty(this.config.data?.id)) {
       this.userService
         .create(this.form.value)
@@ -134,8 +112,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           },
         });
     } else {
+      let user = this.form.value;
+      user.userName = this.selectedEntity.userName;
+      user.email = this.selectedEntity.email;
+
       this.userService
-        .update(this.config.data?.id, this.form.value)
+        .update(this.config.data?.id, user)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: () => {
@@ -162,6 +144,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   setMode(mode: string) {
+    this.mode = mode;
     if (mode == 'update') {
       this.form.controls['userName'].clearValidators();
       this.form.controls['userName'].disable();
@@ -194,6 +177,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           ),
         ])
       ),
+      isActive: [this.selectedEntity.isActive ||  false]
     });
   }
 }

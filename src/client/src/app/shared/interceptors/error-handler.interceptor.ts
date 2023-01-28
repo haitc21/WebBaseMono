@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LocalizationService } from '@abp/ng.core';
 import { NotificationService } from '../services/notification.service';
@@ -20,8 +20,10 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
             'AbpFeatureManagement::InternalServerErrorMessage'
           );
           this.notificationService.showError(InternalServerErrorMessage);
+        } else if (ex.error.error.message) {
+          this.notificationService.showError(ex.error.error.message);
         }
-        throw ex;
+        return throwError(ex);
       })
     );
   }

@@ -98,18 +98,28 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
       this.roleService
         .create(this.form.value)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.ref.close(this.form.value);
-          this.toggleBlockUI(false);
-        });
+        .subscribe(
+          () => {
+            this.ref.close(this.form.value);
+            this.toggleBlockUI(false);
+          },
+          err => {
+            this.toggleBlockUI(false);
+          }
+        );
     } else {
       this.roleService
         .update(this.config.data.id, this.form.value)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.toggleBlockUI(false);
-          this.ref.close(this.form.value);
-        });
+        .subscribe(
+          () => {
+            this.toggleBlockUI(false);
+            this.ref.close(this.form.value);
+          },
+          err => {
+            this.toggleBlockUI(false);
+          }
+        );
     }
   }
 

@@ -6,7 +6,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  templateUrl: 'role-assign.component.html',
+  templateUrl: './role-assign.component.html',
 })
 export class RoleAssignComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();

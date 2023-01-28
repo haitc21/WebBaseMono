@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
@@ -22,17 +21,18 @@ import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/detail/role-detail.component';
 import { PermissionGrantComponent } from './permission-grant/permission-grant.component';
 import { UserComponent } from './user/user.component';
-import { UserDetailComponent } from './user/user-detail.component';
 import { SystemRoutingModule } from './system-routing.module';
-import { RoleAssignComponent } from './user/role-assign.component';
 import { PickListModule } from 'primeng/picklist';
-import { SetPasswordComponent } from './user/set-password.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TagModule } from 'primeng/tag';
 import { ListboxModule } from 'primeng/listbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { UserDetailComponent } from './user/detail/user-detail.component';
+import { RoleAssignComponent } from './user/role-assign/role-assign.component';
+import { SetPasswordComponent } from './user/set-password/set-password.component';
+import { CoreModule } from '@abp/ng.core';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
     SetPasswordComponent,
   ],
   imports: [
-    SharedModule,
+    CoreModule,
     PanelModule,
     TableModule,
     PaginatorModule,

@@ -14,7 +14,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  templateUrl: 'set-password.component.html',
+  templateUrl: './set-password.component.html',
 })
 export class SetPasswordComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();

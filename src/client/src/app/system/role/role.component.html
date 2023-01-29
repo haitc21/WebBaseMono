@@ -3,6 +3,7 @@
     <p-toolbar>
       <ng-template pTemplate="left">
         <button
+          *abpPermission="'AbpIdentity.Roles.Create'"
           pButton
           pRipple
           [label]="Actions.CREATE"
@@ -13,6 +14,7 @@
           (click)="showAddModal()"
         ></button>
         <button
+          *abpPermission="'AbpIdentity.Roles.Delete'"
           pButton
           pRipple
           [label]="Delete"
@@ -56,7 +58,7 @@
           <th pSortableColumn="name">Tên</th>
           <th pSortableColumn="isPublic">Công khai</th>
           <th pSortableColumn="isDefault">Mặc định</th>
-          <th></th>
+          <th *ngIf="visibleActionMenu"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -81,8 +83,9 @@
             >
             </p-tag>
           </td>
-          <td>
+          <td *ngIf="visibleActionMenu">
             <button
+              *abpPermission="'AbpIdentity.Roles.Update'"
               pButton
               pRipple
               icon="pi pi-pencil"
@@ -92,6 +95,7 @@
               (click)="showEditModal(row)"
             ></button>
             <button
+              *abpPermission="'AbpIdentity.Roles.ManagePermissions'"
               pButton
               pRipple
               icon="pi pi-wrench"
@@ -102,6 +106,7 @@
             ></button>
 
             <button
+              *abpPermission="'AbpIdentity.Roles.Delete'"
               pButton
               pRipple
               icon="pi pi-trash"

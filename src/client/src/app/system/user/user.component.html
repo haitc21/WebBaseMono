@@ -3,6 +3,7 @@
     <p-toolbar>
       <ng-template pTemplate="left">
         <button
+        *abpPermission="'AbpIdentity.Users.Create'"
           pButton
           pRipple
           [label]="Actions.CREATE"
@@ -13,6 +14,7 @@
           (click)="showAddModal()"
         ></button>
         <button
+        *abpPermission="'AbpIdentity.Users.Delete'"
           pButton
           pRipple
           [label]="Delete"
@@ -59,7 +61,7 @@
           <th>Số ĐT</th>
           <th>Ngày tham gia</th>
           <th style="width: 150px">Trạng thái</th>
-          <th></th>
+          <th *ngIf="visibleActionMenu"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -79,7 +81,7 @@
             >
             </p-tag>
           </td>
-          <td>
+          <td *ngIf="visibleActionMenu">
             <p-tieredMenu
               [showTransitionOptions]="'200ms'"
               [hideTransitionOptions]="'200ms'"

@@ -1,4 +1,4 @@
-import { PagedResultDto } from '@abp/ng.core';
+import { PagedResultDto, PermissionService } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoleDto, RolesService } from '@proxy/roles';
 import { ConfirmationService } from 'primeng/api';
@@ -33,11 +33,17 @@ export class RoleComponent implements OnInit, OnDestroy {
   public selectedItems: RoleDto[] = [];
   public keyword: string = '';
 
+  hasPermissionUpdate = false;
+  hasPermissionDelete = false;
+  hasPermissionManagementPermionsion = false;
+  visibleActionMenu = false;
+
   constructor(
     private roleService: RolesService,
     public dialogService: DialogService,
     private notificationService: NotificationService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnDestroy(): void {
@@ -46,7 +52,14 @@ export class RoleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getpermission();
     this.loadData();
+  }
+   getpermission() {
+    this.hasPermissionUpdate = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
+    this.hasPermissionDelete = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
+    this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy('AbpIdentity.Users.ManagePermissions');
+    this.visibleActionMenu =   this.hasPermissionUpdate || this.hasPermissionDelete || this.hasPermissionManagementPermionsion
   }
 
   loadData() {

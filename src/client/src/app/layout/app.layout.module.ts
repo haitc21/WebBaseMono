@@ -18,6 +18,7 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
         RippleModule,
         RouterModule,
         AppConfigModule,
-        TieredMenuModule
+        TieredMenuModule,
+        PanelMenuModule
     ],
     exports: [AppLayoutComponent]
 })

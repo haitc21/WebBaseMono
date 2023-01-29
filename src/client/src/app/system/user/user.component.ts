@@ -1,4 +1,4 @@
-import { PagedResultDto } from '@abp/ng.core';
+import { PagedResultDto, PermissionService } from '@abp/ng.core';
 import {
   GetIdentityUsersInput,
   IdentityUserCreateDto,
@@ -20,7 +20,6 @@ import { PermissionGrantComponent } from '../permission-grant/permission-grant.c
 import { UserDetailComponent } from './detail/user-detail.component';
 import { RoleAssignComponent } from './role-assign/role-assign.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
-
 
 @Component({
   selector: 'app-user',
@@ -47,12 +46,18 @@ export class UserComponent implements OnInit, OnDestroy {
   actionMenu: MenuItem[];
   actionItem: IdentityUserDto;
 
+  hasPermissionUpdate = false;
+  hasPermissionDelete = false;
+  hasPermissionManagementPermionsion = false;
+  visibleActionMenu = false;
+
   constructor(
     private userService: UsersService,
     private roleService: RolesService,
     public dialogService: DialogService,
     private notificationService: NotificationService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnDestroy(): void {
@@ -61,8 +66,16 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getpermission();
     this.buildActionMenu();
     this.loadData();
+  }
+
+  private getpermission() {
+    this.hasPermissionUpdate = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
+    this.hasPermissionDelete = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
+    this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy('AbpIdentity.Users.ManagePermissions');
+    this.visibleActionMenu =   this.hasPermissionUpdate || this.hasPermissionDelete || this.hasPermissionManagementPermionsion
   }
 
   buildActionMenu() {
@@ -74,6 +87,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.showEditModal(this.actionItem);
           this.actionItem = null;
         },
+        visible:  this.hasPermissionUpdate,
       },
       {
         label: this.Actions.ASSIGN_ROLE,
@@ -82,6 +96,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.assignRole(this.actionItem);
           this.actionItem = null;
         },
+        visible:  this.hasPermissionUpdate,
       },
       {
         label: this.Actions.MANAGE_PERMISSIONS,
@@ -90,6 +105,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.showPermissionModal(this.actionItem);
           this.actionItem = null;
         },
+        visible:  this.hasPermissionManagementPermionsion,
       },
       {
         label: this.Actions.SET_PASSWORD,
@@ -98,6 +114,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.setPassword(this.actionItem);
           this.actionItem = null;
         },
+        visible:  this.hasPermissionUpdate,
       },
       {
         label: this.Actions.DELETE,
@@ -106,6 +123,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.deleteRow(this.actionItem);
           this.actionItem = null;
         },
+        visible:  this.hasPermissionDelete,
       },
     ];
   }

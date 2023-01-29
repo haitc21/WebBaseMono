@@ -62,8 +62,6 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response: GetPermissionListResultDto) => {
-          console.log(response);
-          
           this.groups = response.groups;
           this.groups.forEach(grPm => {
             let gr = {
@@ -74,14 +72,16 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
             grPm.permissions.forEach(pm => {
               this.permissions.push(pm);
               gr.items.push({
-                label: grPm.name != 'AbpIdentity' ? pm.displayName : this.localizationService.instant(`::Permission:${pm.name}`),
+                label:
+                  grPm.name != 'AbpIdentity'
+                    ? pm.displayName
+                    : this.localizationService.instant(`::Permission:${pm.name}`),
                 value: pm.name,
               });
             });
             grs.push(gr);
           });
-          console.log(grs);
-          
+
           this.groupedPermisssions = grs;
           this.fillValue();
           this.toggleBlockUI(false);
@@ -91,12 +91,9 @@ export class PermissionGrantComponent implements OnInit, OnDestroy {
         },
       });
   }
+
   saveChange() {
     this.toggleBlockUI(true);
-    this.saveData();
-  }
-
-  private saveData() {
     let permissions: UpdatePermissionDto[] = [];
     for (let index = 0; index < this.permissions.length; index++) {
       const isGranted =

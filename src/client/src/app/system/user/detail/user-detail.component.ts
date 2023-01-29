@@ -62,7 +62,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //Init form
     this.buildForm();
-    
+
     this.toggleBlockUI(true);
     if (this.utilService.isEmpty(this.config.data?.id) == false) {
       this.loadFormDetails(this.config.data?.id);
@@ -91,11 +91,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   saveChange() {
     this.toggleBlockUI(true);
-
-    this.saveData();
-  }
-
-  private saveData() {
     this.toggleBlockUI(true);
     if (this.utilService.isEmpty(this.config.data?.id)) {
       this.userService
@@ -176,7 +171,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           ),
         ])
       ),
-      isActive: [this.selectedEntity.isActive ||  false]
+      isActive: [this.selectedEntity.isActive || false],
     });
   }
 }

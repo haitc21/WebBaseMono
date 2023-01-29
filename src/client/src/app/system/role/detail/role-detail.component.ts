@@ -81,13 +81,9 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
         },
       });
   }
+
   saveChange() {
     this.toggleBlockUI(true);
-
-    this.saveData();
-  }
-
-  private saveData() {
     if (this.utilService.isEmpty(this.config.data?.id)) {
       this.roleService
         .create(this.form.value)

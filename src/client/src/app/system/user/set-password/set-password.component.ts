@@ -63,19 +63,21 @@ export class SetPasswordComponent implements OnInit, OnDestroy {
   get formControls() {
     return this.form.controls;
   }
+
   saveChange() {
     this.toggleBlockUI(true);
-    this.saveData();
-  }
-
-  private saveData() {
     this.userService
       .setPassword(this.config.data.id, this.form.value)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        this.toggleBlockUI(false);
-        this.ref.close(this.form.value);
-      });
+      .subscribe(
+        () => {
+          this.toggleBlockUI(false);
+          this.ref.close(this.form.value);
+        },
+        () => {
+          this.toggleBlockUI(false);
+        }
+      );
   }
 
   buildForm() {

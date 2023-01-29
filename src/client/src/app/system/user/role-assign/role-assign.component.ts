@@ -16,8 +16,8 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
   public title: string;
   public btnDisabled = false;
   public closeBtnName: string;
-  public availableRoles: string[] = [];
-  public seletedRoles: string[] = [];
+  public availableRoles: RoleDto[] = [];
+  public seletedRoles: RoleDto[] = [];
   formSavedEventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -36,8 +36,11 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loadRoles();
+  }
+  loadRoles() {
+    this.toggleBlockUI(true);
     var roles = this.roleService.getListAll();
-
     forkJoin({
       roles,
     })
@@ -45,27 +48,8 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (repsonse: any) => {
           var roles = repsonse.roles as RoleDto[];
-          roles.forEach(element => {
-            this.availableRoles.push(element.name);
-          });
+          this.availableRoles = [...roles];
           this.loadDetail(this.config.data.id);
-          this.toggleBlockUI(false);
-        },
-        error: () => {
-          this.toggleBlockUI(false);
-        },
-      });
-  }
-  loadRoles() {
-    this.toggleBlockUI(true);
-    this.roleService
-      .getListAll()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (response: RoleDto[]) => {
-          response.forEach(element => {
-            this.availableRoles.push(element.name);
-          });
           this.toggleBlockUI(false);
         },
         error: () => {
@@ -80,8 +64,8 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response: UserDto) => {
-          this.seletedRoles = response.roles;
-          this.availableRoles = this.availableRoles.filter(x => !this.seletedRoles.includes(x));
+          this.seletedRoles = this.availableRoles.filter(x => response.roles.includes(x.name));
+          this.availableRoles = this.availableRoles.filter(x => !response.roles.includes(x.name));
           this.toggleBlockUI(false);
         },
         error: () => {
@@ -89,22 +73,24 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
         },
       });
   }
+
   saveChange() {
     this.toggleBlockUI(true);
-
-    this.saveData();
-  }
-
-  private saveData() {
-    let updateRoleDto: IdentityUserUpdateRolesDto;
-    updateRoleDto.roleNames = [...this.seletedRoles];
+    debugger;
+    let roleNames = this.seletedRoles.map(x => x.name);
+    let updateRoleDto: IdentityUserUpdateRolesDto = { roleNames: [...roleNames] };
     this.userService
       .updateRoles(this.config.data.id, updateRoleDto)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        this.toggleBlockUI(false);
-        this.ref.close();
-      });
+      .subscribe(
+        () => {
+          this.ref.close(this.seletedRoles);
+          this.toggleBlockUI(false);
+        },
+        () => {
+          this.toggleBlockUI(false);
+        }
+      );
   }
 
   private toggleBlockUI(enabled: boolean) {

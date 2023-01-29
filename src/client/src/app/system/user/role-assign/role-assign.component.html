@@ -1,14 +1,18 @@
-<p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+<p-panel #pnlDetail   [collapsed]="false">
   <p-pickList
     [source]="availableRoles"
     [target]="seletedRoles"
-    sourceHeader="Các quyền có sẵn"
-    targetHeader="Các quyền chọn"
+    sourceHeader="Vai trò khả dụng"
+    targetHeader="Vai trò đã phân"
     [dragdrop]="true"
+    [responsive]="true"
+    filterBy="name"
+    sourceFilterPlaceholder="Tên vai trò"
+    ariaTargetFilterLabel="Tên vai trò"
   >
     <ng-template let-role pTemplate="item">
-      <div>
-        {{ role }}
+      <div> 
+        {{ role.name }}
       </div>
     </ng-template>
   </p-pickList>

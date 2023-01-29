@@ -4,7 +4,7 @@
   [formGroup]="form"
   (ngSubmit)="saveChange()"
 >
-  <p-panel #pnlDetail [toggleable]="true" [collapsed]="false">
+  <p-panel #pnlDetail  [collapsed]="false">
     <div class="formgrid grid">
       <!-- ---------------------------------------------------------------------------------- -->
       <div class="field col-12 md:col-6">
@@ -87,7 +87,6 @@
       </div>
       <!-- ---------------------------------------------------------------------------------- -->
       <div class="field col-12 md:col-6">
-        ==
         <p-checkbox binary="true" label="Kích hoạt" formControlName="isActive"></p-checkbox>
       </div>
       <!-- ---------------------------------------------------------------------------------- -->

@@ -97,7 +97,12 @@ public class UsersAppService : IdentityAppServiceBase, IIdentityUserAppService
             input.UserName,
             input.Email
         );
-
+        // add default roles
+        var roleDefault = await RoleRepository.GetDefaultOnesAsync();
+        if(roleDefault != null)
+        {
+            input.RoleNames = roleDefault.Select(x => x.Name).ToArray();
+        }
         input.MapExtraPropertiesTo(user);
 
         (await UserManager.CreateAsync(user, input.Password)).CheckErrors();

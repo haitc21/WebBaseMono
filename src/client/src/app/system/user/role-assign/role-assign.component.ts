@@ -65,7 +65,9 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: UserDto) => {
           this.seletedRoles = this.availableRoles.filter(x => response.roles.includes(x.name));
-          this.availableRoles = this.availableRoles.filter(x => !response.roles.includes(x.name));
+          this.availableRoles = this.availableRoles.filter(
+            x => x.isPublic && !response.roles.includes(x.name)
+          );
           this.toggleBlockUI(false);
         },
         error: () => {

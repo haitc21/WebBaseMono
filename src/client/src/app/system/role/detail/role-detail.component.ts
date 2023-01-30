@@ -36,11 +36,6 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
-  public generateSlug() {
-    var slug = this.utilService.MakeSeoTitle(this.form.get('name').value);
-    this.form.controls['slug'].setValue(slug);
-  }
   ngOnInit() {
     this.buildForm();
     if (this.utilService.isEmpty(this.config.data?.id) == false) {
@@ -73,7 +68,7 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: RoleDto) => {
           this.selectedEntity = response;
-          this.buildForm();
+          this.form.patchValue(this.selectedEntity);
           this.toggleBlockUI(false);
         },
         error: () => {
@@ -115,20 +110,10 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.form = this.fb.group({
-      name: new FormControl(
-        this.selectedEntity.name || null,
-        Validators.compose([
-          Validators.required,
-          Validators.maxLength(255),
-          Validators.minLength(3),
-        ])
-      ),
-      description: new FormControl(
-        this.selectedEntity.description || null,
-        Validators.compose([Validators.required, Validators.maxLength(500)])
-      ),
-      isPublic: new FormControl(this.selectedEntity.isPublic || false),
-      isDefault: new FormControl(this.selectedEntity.isDefault || false),
+      name: [null, [Validators.required, Validators.maxLength(255), Validators.minLength(3)]],
+      description: [null, [Validators.required, Validators.maxLength(500)]],
+      isPublic: [true],
+      isDefault: [false],
     });
   }
 

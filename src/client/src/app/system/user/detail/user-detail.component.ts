@@ -63,24 +63,22 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     //Init form
     this.buildForm();
 
-    this.toggleBlockUI(true);
     if (this.utilService.isEmpty(this.config.data?.id) == false) {
       this.loadFormDetails(this.config.data?.id);
     } else {
       this.setMode('create');
-      this.toggleBlockUI(false);
     }
   }
   loadFormDetails(id: string) {
+    this.toggleBlockUI(true);
     this.userService
       .get(id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response: IdentityUserDto) => {
           this.selectedEntity = response;
-          this.buildForm();
+          this.form.patchValue(this.selectedEntity);
           this.setMode('update');
-
           this.toggleBlockUI(false);
         },
         error: () => {
@@ -147,31 +145,36 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       this.form.controls['password'].clearValidators();
       this.form.controls['password'].disable();
     } else if (mode == 'create') {
-      this.form.controls['userName'].addValidators(Validators.required);
       this.form.controls['userName'].enable();
-      this.form.controls['email'].addValidators(Validators.required);
+      this.form.controls['userName'].addValidators(Validators.required);
       this.form.controls['email'].enable();
-      this.form.controls['password'].addValidators(Validators.required);
+      this.form.controls['email'].addValidators(Validators.required);
       this.form.controls['password'].enable();
+      this.form.controls['password'].addValidators([
+        Validators.required,
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}$'
+        ),
+      ]);
     }
   }
   buildForm() {
     this.form = this.fb.group({
-      name: new FormControl(this.selectedEntity.name || null, Validators.required),
-      surname: new FormControl(this.selectedEntity.surname || null, Validators.required),
-      userName: new FormControl(this.selectedEntity.userName || null, Validators.required),
-      email: new FormControl(this.selectedEntity.email || null, Validators.required),
-      phoneNumber: new FormControl(this.selectedEntity.phoneNumber || null, Validators.required),
-      password: new FormControl(
+      name: [null, [Validators.required]],
+      surname: [null, [Validators.required]],
+      userName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required]],
+      password: [
         null,
-        Validators.compose([
+        [
           Validators.required,
           Validators.pattern(
             '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}$'
           ),
-        ])
-      ),
-      isActive: [this.selectedEntity.isActive || false],
+        ],
+      ],
+      isActive: [true],
     });
   }
 }

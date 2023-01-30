@@ -37,8 +37,13 @@
             [(ngModel)]="keyword"
             placeholder="Họ tên, tài khoản"
           />
-          <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button>
         </span>
+        <button
+          pButton
+          icon="pi pi-filter"
+          class="p-button-info"
+          (click)="op.toggle($event)"
+        ></button>
       </ng-template>
     </p-toolbar>
 

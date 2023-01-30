@@ -3,7 +3,7 @@
     <p-toolbar>
       <ng-template pTemplate="left">
         <button
-        *abpPermission="'AbpIdentity.Users.Create'"
+          *abpPermission="'AbpIdentity.Users.Create'"
           pButton
           pRipple
           [label]="Actions.CREATE"
@@ -14,7 +14,7 @@
           (click)="showAddModal()"
         ></button>
         <button
-        *abpPermission="'AbpIdentity.Users.Delete'"
+          *abpPermission="'AbpIdentity.Users.Delete'"
           pButton
           pRipple
           [label]="Delete"
@@ -37,6 +37,7 @@
             [(ngModel)]="keyword"
             placeholder="Họ tên, tài khoản"
           />
+          <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button>
         </span>
       </ng-template>
     </p-toolbar>
@@ -125,3 +126,7 @@
     </p-blockUI>
   </p-panel>
 </div>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate> Content </ng-template>
+</p-overlayPanel>

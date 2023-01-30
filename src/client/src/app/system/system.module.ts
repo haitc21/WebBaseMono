@@ -33,6 +33,7 @@ import { UserDetailComponent } from './user/detail/user-detail.component';
 import { RoleAssignComponent } from './user/role-assign/role-assign.component';
 import { SetPasswordComponent } from './user/set-password/set-password.component';
 import { CoreModule } from '@abp/ng.core';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CoreModule } from '@abp/ng.core';
     TagModule,
     ListboxModule,
     TooltipModule,
-    TieredMenuModule
+    TieredMenuModule,
+    OverlayPanelModule,
   ],
   entryComponents: [
     RoleDetailComponent,

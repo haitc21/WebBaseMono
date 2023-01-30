@@ -34,6 +34,7 @@ import { RoleAssignComponent } from './user/role-assign/role-assign.component';
 import { SetPasswordComponent } from './user/set-password/set-password.component';
 import { CoreModule } from '@abp/ng.core';
 import { PasswordModule } from 'primeng/password';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { PasswordModule } from 'primeng/password';
     TooltipModule,
     TieredMenuModule,
     PasswordModule,
+    OverlayPanelModule,
   ],
   entryComponents: [
     RoleDetailComponent,

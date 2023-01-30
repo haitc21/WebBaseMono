@@ -28,8 +28,7 @@
       </ng-template>
 
       <ng-template pTemplate="right">
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
+        <div class="p-inputgroup">
           <input
             pInputText
             type="text"
@@ -37,13 +36,13 @@
             [(ngModel)]="keyword"
             placeholder="Họ tên, tài khoản"
           />
-        </span>
-        <button
-          pButton
-          icon="pi pi-filter"
-          class="p-button-info"
-          (click)="op.toggle($event)"
-        ></button>
+          <button
+            pButton
+            icon="pi pi-filter"
+            class="p-button-info"
+            (click)="op.toggle($event)"
+          ></button>
+        </div>
       </ng-template>
     </p-toolbar>
 

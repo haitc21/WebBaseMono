@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Domain.Entities;
 
 namespace WebBase.Roles;
 
-public class CreateUpdateRoleDto :  IHasConcurrencyStamp
+public class CreateUpdateRoleDto : IHasConcurrencyStamp
 {
     public string Name { get; set; }
     public bool IsDefault { get; set; }

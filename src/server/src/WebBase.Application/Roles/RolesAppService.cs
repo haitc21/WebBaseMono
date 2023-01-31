@@ -1,30 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WebBase.Permissions;
-using WebBase.Roles;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization.Permissions;
-using Volo.Abp.Domain.Entities;
+using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
-using Volo.Abp.Localization;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.SimpleStateChecking;
-using Volo.Abp.Data;
 using WebBase.Localization;
-using Microsoft.AspNetCore.Identity;
 
 namespace WebBase.Roles;
 
 [Authorize(IdentityPermissions.Roles.Default)]
-
 public class RolesAppService : CrudAppService<
     IdentityRole,
     RoleDto,
@@ -66,7 +60,6 @@ public class RolesAppService : CrudAppService<
     }
 
     [Authorize(IdentityPermissions.Roles.Delete)]
-
     public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
     {
         await Repository.DeleteManyAsync(ids);
@@ -74,18 +67,15 @@ public class RolesAppService : CrudAppService<
     }
 
     [Authorize(IdentityPermissions.Roles.Default)]
-
     public async Task<List<RoleDto>> GetListAllAsync()
     {
         var query = await Repository.GetQueryableAsync();
         var data = await AsyncExecuter.ToListAsync(query);
 
         return ObjectMapper.Map<List<IdentityRole>, List<RoleDto>>(data);
-
     }
 
     [Authorize(IdentityPermissions.Roles.Default)]
-
     public async Task<PagedResultDto<RoleDto>> GetListFilterAsync(BaseListFilterDto input)
     {
         var query = await Repository.GetQueryableAsync();
@@ -98,8 +88,7 @@ public class RolesAppService : CrudAppService<
     }
 
     [Authorize(IdentityPermissions.Roles.Create)]
-
-    public async override Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
+    public override async Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
     {
         var role = new IdentityRole(GuidGenerator.Create(), input.Name)
         {
@@ -113,8 +102,7 @@ public class RolesAppService : CrudAppService<
     }
 
     [Authorize(IdentityPermissions.Roles.Update)]
-
-    public async override Task<RoleDto> UpdateAsync(Guid id, CreateUpdateRoleDto input)
+    public override async Task<RoleDto> UpdateAsync(Guid id, CreateUpdateRoleDto input)
     {
         var role = await RoleManager.GetByIdAsync(id);
 
@@ -125,7 +113,6 @@ public class RolesAppService : CrudAppService<
         role.IsDefault = input.IsDefault;
         role.IsPublic = input.IsPublic;
         role.SetProperty(RoleConsts.DescriptionFieldName, input.Description);
-
 
         (await RoleManager.UpdateAsync(role)).CheckErrors();
         await CurrentUnitOfWork.SaveChangesAsync();
@@ -222,7 +209,6 @@ public class RolesAppService : CrudAppService<
             Permissions = new List<PermissionGrantInfoDto>(),
         };
     }
-
 
     public virtual async Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input)
     {

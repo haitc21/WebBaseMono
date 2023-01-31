@@ -5,5 +5,4 @@ namespace WebBase.Localization;
 [LocalizationResourceName("WebBase")]
 public class WebBaseResource
 {
-
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebBase.Roles;
+﻿namespace WebBase.Roles;
 
 public class RoleConsts
 {

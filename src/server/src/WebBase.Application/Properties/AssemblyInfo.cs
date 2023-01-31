@@ -1,2 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
-[assembly:InternalsVisibleToAttribute("WebBase.Application.Tests")]
+
+[assembly: InternalsVisibleToAttribute("WebBase.Application.Tests")]

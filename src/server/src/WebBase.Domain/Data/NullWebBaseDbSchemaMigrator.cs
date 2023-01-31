@@ -6,6 +6,7 @@ namespace WebBase.Data;
 /* This is used if database provider does't define
  * IWebBaseDbSchemaMigrator implementation.
  */
+
 public class NullWebBaseDbSchemaMigrator : IWebBaseDbSchemaMigrator, ITransientDependency
 {
     public Task MigrateAsync()

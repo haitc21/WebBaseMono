@@ -1,5 +1,4 @@
-﻿using WebBase.Localization;
-using Volo.Abp.AuditLogging;
+﻿using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -12,6 +11,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using WebBase.Localization;
 
 namespace WebBase;
 
@@ -23,7 +23,7 @@ namespace WebBase;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
+    typeof(AbpTenantManagementDomainSharedModule)
     )]
 public class WebBaseDomainSharedModule : AbpModule
 {

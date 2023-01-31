@@ -1,7 +1,7 @@
-﻿using WebBase.EntityFrameworkCore;
-using Volo.Abp.Autofac;
+﻿using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
+using WebBase.EntityFrameworkCore;
 
 namespace WebBase.DbMigrator;
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -19,6 +18,8 @@ public interface IUsersAppService : ICrudAppService<
     Task<PagedResultDto<UserInListDto>> GetListWithFilterAsync(BaseListFilterDto input);
 
     Task<List<UserInListDto>> GetListAllAsync(string filterKeyword);
+
     Task AssignRolesAsync(Guid userId, string[] roleNames);
+
     Task SetPasswordAsync(Guid userId, SetPasswordDto input);
 }

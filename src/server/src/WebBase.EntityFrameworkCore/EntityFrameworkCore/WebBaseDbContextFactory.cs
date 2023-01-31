@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace WebBase.EntityFrameworkCore;
 
 /* This class is needed for EF Core console commands
  * (like Add-Migration and Update-Database commands) */
+
 public class WebBaseDbContextFactory : IDesignTimeDbContextFactory<WebBaseDbContext>
 {
     public WebBaseDbContext CreateDbContext(string[] args)

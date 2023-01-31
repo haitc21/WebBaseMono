@@ -10,6 +10,7 @@ namespace WebBase.Samples;
  * (like IIdentityUserAppService here).
  * Only test your own application services.
  */
+
 public class SampleAppServiceTests : WebBaseApplicationTestBase
 {
     private readonly IIdentityUserAppService _userAppService;

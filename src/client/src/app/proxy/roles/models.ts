@@ -15,3 +15,7 @@ export interface RoleDto extends EntityDto<string> {
   description?: string;
   concurrencyStamp?: string;
 }
+
+export interface RoleLookupDto extends EntityDto<string> {
+  name?: string;
+}

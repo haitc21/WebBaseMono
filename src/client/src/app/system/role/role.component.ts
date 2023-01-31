@@ -52,10 +52,10 @@ export class RoleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getpermission();
+    this.getPermission();
     this.loadData();
   }
-   getpermission() {
+   getPermission() {
     this.hasPermissionUpdate = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
     this.hasPermissionDelete = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
     this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy('AbpIdentity.Users.ManagePermissions');

@@ -6,7 +6,7 @@ import {
   IdentityUserUpdateDto,
 } from '@abp/ng.identity/proxy';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RolesService } from '@proxy/roles';
+import { RoleLookupDto, RolesService } from '@proxy/roles';
 import { UsersService } from '@proxy/users';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -42,6 +42,11 @@ export class UserComponent implements OnInit, OnDestroy {
   public selectedItems: IdentityUserDto[] = [];
   public keyword: string = '';
   filter: GetIdentityUsersInput;
+  emailSearch: string = '';
+  phoneNumberSearch: string = '';
+  roleIdSearch: string = '';
+
+  roleOptions: RoleLookupDto[] = [];
 
   actionMenu: MenuItem[];
   actionItem: IdentityUserDto;
@@ -66,16 +71,36 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getpermission();
+    this.getPermission();
     this.buildActionMenu();
+    this.loadOptions();
     this.loadData();
   }
-
-  private getpermission() {
+  loadOptions() {
+    this.toggleBlockUI(true);
+    this.roleService
+      .getRoleLookup()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        res => {
+          this.roleOptions = res.items;
+          this.toggleBlockUI(false);
+        },
+        () => {
+          this.toggleBlockUI(false);
+        }
+      );
+  }
+  getPermission() {
     this.hasPermissionUpdate = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
     this.hasPermissionDelete = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
-    this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy('AbpIdentity.Users.ManagePermissions');
-    this.visibleActionMenu =   this.hasPermissionUpdate || this.hasPermissionDelete || this.hasPermissionManagementPermionsion
+    this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy(
+      'AbpIdentity.Users.ManagePermissions'
+    );
+    this.visibleActionMenu =
+      this.hasPermissionUpdate ||
+      this.hasPermissionDelete ||
+      this.hasPermissionManagementPermionsion;
   }
 
   buildActionMenu() {
@@ -87,7 +112,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.showEditModal(this.actionItem);
           this.actionItem = null;
         },
-        visible:  this.hasPermissionUpdate,
+        visible: this.hasPermissionUpdate,
       },
       {
         label: this.Actions.ASSIGN_ROLE,
@@ -96,7 +121,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.assignRole(this.actionItem);
           this.actionItem = null;
         },
-        visible:  this.hasPermissionUpdate,
+        visible: this.hasPermissionUpdate,
       },
       {
         label: this.Actions.MANAGE_PERMISSIONS,
@@ -105,7 +130,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.showPermissionModal(this.actionItem);
           this.actionItem = null;
         },
-        visible:  this.hasPermissionManagementPermionsion,
+        visible: this.hasPermissionManagementPermionsion,
       },
       {
         label: this.Actions.SET_PASSWORD,
@@ -114,7 +139,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.setPassword(this.actionItem);
           this.actionItem = null;
         },
-        visible:  this.hasPermissionUpdate,
+        visible: this.hasPermissionUpdate,
       },
       {
         label: this.Actions.DELETE,
@@ -123,7 +148,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.deleteRow(this.actionItem);
           this.actionItem = null;
         },
-        visible:  this.hasPermissionDelete,
+        visible: this.hasPermissionDelete,
       },
     ];
   }

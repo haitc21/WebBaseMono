@@ -12,6 +12,7 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
+using Volo.Abp.ObjectMapping;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.SimpleStateChecking;
 using WebBase.Localization;
@@ -73,6 +74,14 @@ public class RolesAppService : CrudAppService<
         var data = await AsyncExecuter.ToListAsync(query);
 
         return ObjectMapper.Map<List<IdentityRole>, List<RoleDto>>(data);
+    }
+    public async Task<ListResultDto<RoleLookupDto>> GetRoleLookupAsync()
+    {
+        var query = await Repository.GetQueryableAsync();
+        var data = await AsyncExecuter.ToListAsync(query);
+        return new ListResultDto<RoleLookupDto>(
+            ObjectMapper.Map<List<IdentityRole>, List<RoleLookupDto>>(data)
+        );
     }
 
     [Authorize(IdentityPermissions.Roles.Default)]

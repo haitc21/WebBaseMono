@@ -82,7 +82,7 @@
             formControlName="phoneNumber"
             class="w-full"
           />
-          <label for="phoneNumber">Số điện thoại<span class="required">*</span></label>
+          <label for="phoneNumber">Số ĐT<span class="required">*</span></label>
         </span>
         <app-validation-message
           [entityControl]="formControls.phoneNumber"
@@ -104,7 +104,7 @@
         pRipples
         type="submit"
         label="Lưu"
-        class="p-button-sm p-button-primary"
+        class=" p-button-info"
         icon="pi pi-check"
         [disabled]="!form.valid || btnDisabled"
       ></button>

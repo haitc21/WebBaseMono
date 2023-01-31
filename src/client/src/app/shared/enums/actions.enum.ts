@@ -5,7 +5,10 @@ export enum Actions {
   APPROVE = 'Phê duyệt',
   MANAGE_PERMISSIONS = 'Phân quyền',
   CANCEL = "Hủy",
-  CLOSE = "hủy",
+  CLOSE = "Đóng",
   SET_PASSWORD = "Đặt mật khẩu",
-  ASSIGN_ROLE = "qQuản lý vai trò"
+  ASSIGN_ROLE = "qQuản lý vai trò",
+  SEARCH = "Tìm kiếm",
+  ADVANCE_SEARCH = "Tìm kiếm nâng cao",
+  ACTION = "Thao tác"
 }

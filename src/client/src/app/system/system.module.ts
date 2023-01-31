@@ -35,6 +35,7 @@ import { SetPasswordComponent } from './user/set-password/set-password.component
 import { CoreModule } from '@abp/ng.core';
 import { PasswordModule } from 'primeng/password';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     TieredMenuModule,
     PasswordModule,
     OverlayPanelModule,
+    CardModule,
   ],
   entryComponents: [
     RoleDetailComponent,

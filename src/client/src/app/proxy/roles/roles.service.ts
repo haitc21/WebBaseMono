@@ -1,6 +1,6 @@
-import type { CreateUpdateRoleDto, RoleDto } from './models';
+import type { CreateUpdateRoleDto, RoleDto, RoleLookupDto } from './models';
 import { RestService } from '@abp/ng.core';
-import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
+import type { ListResultDto, PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { BaseListFilterDto } from '../models';
 import type { GetPermissionListResultDto, UpdatePermissionsDto } from '../volo/abp/permission-management/models';
@@ -77,6 +77,14 @@ export class RolesService {
       method: 'GET',
       url: '/api/app/roles/permissions',
       params: { providerName, providerKey },
+    },
+    { apiName: this.apiName });
+  
+
+  getRoleLookup = () =>
+    this.restService.request<any, ListResultDto<RoleLookupDto>>({
+      method: 'GET',
+      url: '/api/app/roles/role-lookup',
     },
     { apiName: this.apiName });
   

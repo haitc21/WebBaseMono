@@ -21,7 +21,7 @@ public class WebBaseApplicationAutoMapperProfile : Profile
             :
             null));
         CreateMap<CreateUpdateRoleDto, IdentityRole>();
-
+        CreateMap<IdentityRole, RoleLookupDto>();
         //User
         CreateMap<IdentityUser, UserDto>();
         CreateMap<IdentityUser, UserInListDto>();

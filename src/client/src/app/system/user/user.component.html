@@ -8,7 +8,7 @@
           pRipple
           [label]="Actions.CREATE"
           icon="pi pi-plus"
-          class="p-button-sm p-button-success mr-1"
+          class="p-button-success mr-1"
           [pTooltip]="Actions.CREATE"
           tooltipPosition="top"
           (click)="showAddModal()"
@@ -19,7 +19,7 @@
           pRipple
           [label]="Delete"
           icon="pi pi-trash"
-          class="p-button-sm p-button-danger"
+          class="p-button-danger"
           [pTooltip]="Actions.DELETE"
           tooltipPosition="top"
           (click)="deleteItems()"
@@ -28,7 +28,7 @@
       </ng-template>
 
       <ng-template pTemplate="right">
-        <div class="p-inputgroup">
+        <div class="p-inputgroup search-width">
           <input
             pInputText
             type="text"
@@ -40,6 +40,8 @@
             pButton
             icon="pi pi-filter"
             class="p-button-info"
+            [pTooltip]="Actions.ADVANCE_SEARCH"
+            tooltipPosition="top"
             (click)="op.toggle($event)"
           ></button>
         </div>
@@ -60,8 +62,8 @@
           <th style="width: 3rem">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th pSortableColumn="name">Họ tên</th>
           <th>Tài khoản</th>
+          <th pSortableColumn="name">Họ tên</th>
           <th>Email</th>
           <th>Số ĐT</th>
           <th>Ngày tham gia</th>
@@ -74,8 +76,8 @@
           <td>
             <p-tableCheckbox [value]="row"></p-tableCheckbox>
           </td>
-          <td>{{ row.surname ? row.surname + ' ' + row.name : row.name }}</td>
           <td>{{ row.userName }}</td>
+          <td>{{ row.surname ? row.surname + ' ' + row.name : row.name }}</td>
           <td>{{ row.email }}</td>
           <td>{{ row.phoneNumber }}</td>
           <td>{{ row.creationTime | date : 'dd-MM-yyyy hh:mm' }}</td>
@@ -102,7 +104,9 @@
               type="button"
               pButton
               icon="p-button-sm pi pi-fw pi-cog"
-              label="Thao tác"
+              [label]="Actions.ACTION"
+              [pTooltip]="Actions.ACTION"
+              tooltipPosition="top"
               (click)="menu.toggle($event); setActionItem(row)"
             ></button>
           </td>
@@ -132,5 +136,58 @@
 </div>
 
 <p-overlayPanel #op>
-  <ng-template pTemplate> Content </ng-template>
+  <p-card>
+    <ng-template pTemplate="header">ìm kiếm nâng cao</ng-template>
+    <div class="search-width">
+      <div class="field col-12">
+        <span class="p-float-label">
+          <input id="email" type="text" pInputText [(ngModel)]="emailSearch" class="w-full" />
+          <label for="email">Email</label>
+        </span>
+      </div>
+      <!-- ------------------------------------------------------------------------------------ -->
+      <div class="field col-12">
+        <span class="p-float-label">
+          <input
+            id="phoneNumber"
+            type="text"
+            pInputText
+            [(ngModel)]="phoneNumberSearch"
+            class="w-full"
+          />
+          <label for="phoneNumber">Số ĐT</label>
+        </span>
+      </div>
+      <!-- --------------------------------------------------------------------------------- -->
+      <div class="field col-12">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="roleOptions"
+            [(ngModel)]="roleIdSearch"
+            optionLabel="name"
+            [filter]="true"
+            optionValue="id"
+            filterBy="name"
+            [showClear]="true"
+            [autoDisplayFirst]="false"
+            styleClass="w-full"
+          ></p-dropdown>
+          <label for="phoneNumber">Vai trò</label>
+        </span>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        *abpPermission="'AbpIdentity.Users.Create'"
+        pButton
+        pRipple
+        [label]="Actions.SEARCH"
+        icon="pi pi-search"
+        class="p-button-info mr-1"
+        [pTooltip]="Actions.SEARCH"
+        tooltipPosition="top"
+        (click)="loadData()"
+      ></button>
+    </ng-template>
+  </p-card>
 </p-overlayPanel>

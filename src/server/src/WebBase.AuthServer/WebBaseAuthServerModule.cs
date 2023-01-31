@@ -1,23 +1,21 @@
-using System;
-using System.IO;
-using System.Linq;
 using Localization.Resources.AbpUi;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebBase.EntityFrameworkCore;
-using WebBase.Localization;
-using WebBase.MultiTenancy;
 using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
@@ -32,13 +30,10 @@ using Volo.Abp.DistributedLocking;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
-using Microsoft.AspNetCore.Localization;
-using System.Collections.Generic;
-using System.Globalization;
-using Volo.Abp.OpenIddict.Localization;
-using Volo.Abp.Account.Localization;
+using WebBase.EntityFrameworkCore;
+using WebBase.Localization;
+using WebBase.MultiTenancy;
 
 namespace WebBase;
 
@@ -83,7 +78,6 @@ public class WebBaseAuthServerModule : AbpModule
 
             options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
             //options.Languages.Add(new LanguageInfo("en", "en", "English"));
-
         });
 
         Configure<AbpBundlingOptions>(options =>

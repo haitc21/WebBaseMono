@@ -1,18 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Entities;
-using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
-using static Volo.Abp.Identity.Settings.IdentitySettingNames;
 
 namespace WebBase.Users;
 
@@ -51,7 +49,7 @@ public class UsersAppService : IdentityAppServiceBase, IIdentityUserAppService
             identityUser
         );
         var roles = await UserManager.GetRolesAsync(identityUser);
-        result.Roles= roles;
+        result.Roles = roles;
         return result;
     }
 
@@ -99,7 +97,7 @@ public class UsersAppService : IdentityAppServiceBase, IIdentityUserAppService
         );
         // add default roles
         var roleDefault = await RoleRepository.GetDefaultOnesAsync();
-        if(roleDefault != null)
+        if (roleDefault != null)
         {
             input.RoleNames = roleDefault.Select(x => x.Name).ToArray();
         }

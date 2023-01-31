@@ -1,17 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WebBase;
 
 public class Program
 {
-    public async static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
         Log.Logger = new LoggerConfiguration()

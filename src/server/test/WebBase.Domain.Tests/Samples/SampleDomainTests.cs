@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Shouldly;
+﻿using Shouldly;
+using System.Threading.Tasks;
 using Volo.Abp.Identity;
 using Xunit;
 
@@ -10,6 +10,7 @@ namespace WebBase.Samples;
  * (like IdentityUserManager here).
  * Only test your own domain services.
  */
+
 public class SampleDomainTests : WebBaseDomainTestBase
 {
     private readonly IIdentityUserRepository _identityUserRepository;

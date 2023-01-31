@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
@@ -47,8 +46,8 @@ public static class WebBaseEfCoreEntityExtensionMappings
                  RoleConsts.DescriptionFieldName,
                  options =>
                  {
-                       options.Attributes.Add(new RequiredAttribute());
-                       options.Attributes.Add(new StringLengthAttribute(RoleConsts.DescriptionMaxLength));
+                     options.Attributes.Add(new RequiredAttribute());
+                     options.Attributes.Add(new StringLengthAttribute(RoleConsts.DescriptionMaxLength));
                  });
         });
     }

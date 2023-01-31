@@ -1,6 +1,6 @@
-﻿using WebBase.Localization;
-using Volo.Abp.Authorization.Permissions;
+﻿using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
+using WebBase.Localization;
 
 namespace WebBase.Permissions;
 

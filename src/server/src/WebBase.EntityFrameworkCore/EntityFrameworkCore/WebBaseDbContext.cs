@@ -40,6 +40,7 @@ public class WebBaseDbContext :
 
     //Identity
     public DbSet<IdentityUser> Users { get; set; }
+
     public DbSet<IdentityRole> Roles { get; set; }
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
     public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
@@ -48,14 +49,14 @@ public class WebBaseDbContext :
 
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
+
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
-    #endregion
+    #endregion Entities from the modules
 
     public WebBaseDbContext(DbContextOptions<WebBaseDbContext> options)
         : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

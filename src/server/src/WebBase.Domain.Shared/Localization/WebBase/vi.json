@@ -17,6 +17,5 @@
     "Permission:AbpIdentity.Users.Update": "Sửa người dùng",
     "Permission:AbpIdentity.Users.Delete": "Xóa người dùng",
     "Permission:AbpIdentity.Users.ManagePermissions": "Phân quyền cho người dùng"
-
   }
 }

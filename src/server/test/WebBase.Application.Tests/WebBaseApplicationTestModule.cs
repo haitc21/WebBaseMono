@@ -8,5 +8,4 @@ namespace WebBase;
     )]
 public class WebBaseApplicationTestModule : AbpModule
 {
-
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,13 +5,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebBase.EntityFrameworkCore;
-using WebBase.MultiTenancy;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
@@ -28,8 +28,8 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
+using WebBase.EntityFrameworkCore;
+using WebBase.MultiTenancy;
 
 namespace WebBase;
 
@@ -130,7 +130,6 @@ public class WebBaseHttpApiHostModule : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
-
             options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
             //options.Languages.Add(new LanguageInfo("en", "en", "English"));
         });
@@ -148,7 +147,7 @@ public class WebBaseHttpApiHostModule : AbpModule
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "WebBase-Protection-Keys");
         }
     }
-    
+
     private void ConfigureDistributedLocking(
         ServiceConfigurationContext context,
         IConfiguration configuration)

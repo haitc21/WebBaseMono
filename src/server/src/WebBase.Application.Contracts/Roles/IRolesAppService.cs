@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -16,9 +15,12 @@ public interface IRolesAppService : ICrudAppService
     CreateUpdateRoleDto>
 {
     Task<PagedResultDto<RoleDto>> GetListFilterAsync(BaseListFilterDto input);
+
     Task<List<RoleDto>> GetListAllAsync();
+
     Task DeleteMultipleAsync(IEnumerable<Guid> ids);
 
     Task<GetPermissionListResultDto> GetPermissionsAsync(string providerName, string providerKey);
+
     Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input);
 }

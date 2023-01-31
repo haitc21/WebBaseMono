@@ -1,5 +1,5 @@
-﻿using WebBase.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
+using WebBase.EntityFrameworkCore;
 
 namespace WebBase;
 
@@ -8,5 +8,4 @@ namespace WebBase;
     )]
 public class WebBaseDomainTestModule : AbpModule
 {
-
 }

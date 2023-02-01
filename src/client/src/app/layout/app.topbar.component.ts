@@ -27,7 +27,7 @@ export class AppTopBarComponent implements OnInit {
   ngOnInit(): void {
     this.userMenuItems = [
       {
-        label: 'Xem thông tin cá nhân',
+        label: 'thông tin cá nhân',
         icon: 'pi pi-id-card',
         routerLink: ['/profile'],
       },

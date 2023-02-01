@@ -8,7 +8,7 @@
           pRipple
           [label]="Actions.CREATE"
           icon="pi pi-plus"
-          class=" p-button-success mr-1"
+          class="p-button-success mr-1"
           [pTooltip]="Actions.CREATE"
           tooltipPosition="top"
           (click)="showAddModal()"
@@ -19,7 +19,7 @@
           pRipple
           [label]="Delete"
           icon="pi pi-trash"
-          class=" p-button-danger"
+          class="p-button-danger"
           [pTooltip]="Actions.DELETE"
           tooltipPosition="top"
           (click)="deleteItems()"
@@ -28,7 +28,7 @@
       </ng-template>
 
       <ng-template pTemplate="right">
-        <span class="p-input-icon-left">
+        <span class="p-input-icon-left search-width">
           <i class="pi pi-search"></i>
           <input
             pInputText
@@ -36,6 +36,7 @@
             (keyup.enter)="loadData()"
             [(ngModel)]="keyword"
             placeholder="Tên vai trò"
+            class="w-full"
           />
         </span>
       </ng-template>

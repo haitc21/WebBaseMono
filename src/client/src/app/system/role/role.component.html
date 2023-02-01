@@ -59,7 +59,7 @@
           <th pSortableColumn="name">Tên</th>
           <th pSortableColumn="isPublic">Công khai</th>
           <th pSortableColumn="isDefault">Mặc định</th>
-          <th *ngIf="visibleActionMenu"></th>
+          <th *ngIf="visibleActionColumn" class="action-column"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -84,7 +84,7 @@
             >
             </p-tag>
           </td>
-          <td *ngIf="visibleActionMenu">
+          <td *ngIf="visibleActionColumn">
             <button
               *abpPermission="'AbpIdentity.Roles.Update'"
               pButton

@@ -36,7 +36,7 @@ export class RoleComponent implements OnInit, OnDestroy {
   hasPermissionUpdate = false;
   hasPermissionDelete = false;
   hasPermissionManagementPermionsion = false;
-  visibleActionMenu = false;
+  visibleActionColumn = false;
 
   constructor(
     private roleService: RolesService,
@@ -59,7 +59,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     this.hasPermissionUpdate = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
     this.hasPermissionDelete = this.permissionService.getGrantedPolicy('AbpIdentity.Users.Update');
     this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy('AbpIdentity.Users.ManagePermissions');
-    this.visibleActionMenu =   this.hasPermissionUpdate || this.hasPermissionDelete || this.hasPermissionManagementPermionsion
+    this.visibleActionColumn =   this.hasPermissionUpdate || this.hasPermissionDelete || this.hasPermissionManagementPermionsion
   }
 
   loadData() {

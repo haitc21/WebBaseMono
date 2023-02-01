@@ -54,7 +54,7 @@ export class UserComponent implements OnInit, OnDestroy {
   hasPermissionUpdate = false;
   hasPermissionDelete = false;
   hasPermissionManagementPermionsion = false;
-  visibleActionMenu = false;
+  visibleActionColumn = false;
 
   constructor(
     private userService: UsersService,
@@ -97,7 +97,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.hasPermissionManagementPermionsion = this.permissionService.getGrantedPolicy(
       'AbpIdentity.Users.ManagePermissions'
     );
-    this.visibleActionMenu =
+    this.visibleActionColumn =
       this.hasPermissionUpdate ||
       this.hasPermissionDelete ||
       this.hasPermissionManagementPermionsion;

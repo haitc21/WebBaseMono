@@ -56,8 +56,41 @@ public class UsersAppService : IdentityAppServiceBase, IIdentityUserAppService
     [Authorize(IdentityPermissions.Users.Default)]
     public virtual async Task<PagedResultDto<IdentityUserDto>> GetListAsync(GetIdentityUsersInput input)
     {
+        if (input.Sorting.IsNullOrWhiteSpace())
+        {
+            input.Sorting = nameof(IdentityUser.UserName);
+        }
         var count = await UserRepository.GetCountAsync(input.Filter);
         var list = await UserRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter);
+
+        return new PagedResultDto<IdentityUserDto>(
+            count,
+            ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(list)
+        );
+    }
+
+    [Authorize(IdentityPermissions.Users.Default)]
+    public virtual async Task<PagedResultDto<IdentityUserDto>> GetListFilterAsync(GetUserListDto input)
+    {
+        if (input.Sorting.IsNullOrWhiteSpace())
+        {
+            input.Sorting = nameof(IdentityUser.UserName);
+        }
+        var count = await UserRepository.GetCountAsync(input.Filter,
+                                                      input.roleId, null,
+                                                      input.PhoneNumber,
+                                                      input.Email);
+        var list = await UserRepository.GetListAsync(
+                                        input.Sorting,
+                                        input.MaxResultCount,
+                                        input.SkipCount,
+                                        input.Filter,
+                                        false,
+                                        input.roleId,
+                                        null,
+                                        null,
+                                        input.PhoneNumber,
+                                        input.Email);
 
         return new PagedResultDto<IdentityUserDto>(
             count,

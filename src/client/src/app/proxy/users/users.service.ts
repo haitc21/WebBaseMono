@@ -1,4 +1,4 @@
-import type { SetPasswordDto, UserDto } from './models';
+import type { GetUserListDto, SetPasswordDto, UserDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -84,6 +84,15 @@ export class UsersService {
       method: 'GET',
       url: '/api/app/users',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName });
+  
+
+  getListFilter = (input: GetUserListDto) =>
+    this.restService.request<any, PagedResultDto<IdentityUserDto>>({
+      method: 'GET',
+      url: '/api/app/users/filter',
+      params: { email: input.email, phoneNumber: input.phoneNumber, roleId: input.roleId, filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
   

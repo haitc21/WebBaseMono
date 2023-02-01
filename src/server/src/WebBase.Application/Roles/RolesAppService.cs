@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -88,7 +89,9 @@ public class RolesAppService : CrudAppService<
     public async Task<PagedResultDto<RoleDto>> GetListFilterAsync(BaseListFilterDto input)
     {
         var query = await Repository.GetQueryableAsync();
-        query = query.WhereIf(!string.IsNullOrWhiteSpace(input.Keyword), x => x.Name.Contains(input.Keyword));
+        query = query.WhereIf(!string.IsNullOrWhiteSpace(input.Keyword),
+                              x => x.Name.Contains(input.Keyword))
+                     .OrderBy(nameof(IdentityRole.Name));
 
         var totalCount = await AsyncExecuter.LongCountAsync(query);
         var data = await AsyncExecuter.ToListAsync(query.Skip(input.SkipCount).Take(input.MaxResultCount));

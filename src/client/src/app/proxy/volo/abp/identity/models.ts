@@ -1,5 +1,9 @@
 import type { ExtensibleEntityDto, ExtensibleFullAuditedEntityDto, ExtensibleObject, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 
+export interface GetIdentityUsersInput extends PagedAndSortedResultRequestDto {
+  filter?: string;
+}
+
 export interface IdentityUserDto extends ExtensibleFullAuditedEntityDto<string> {
   tenantId?: string;
   userName?: string;
@@ -13,10 +17,6 @@ export interface IdentityUserDto extends ExtensibleFullAuditedEntityDto<string> 
   lockoutEnabled: boolean;
   lockoutEnd?: string;
   concurrencyStamp?: string;
-}
-
-export interface GetIdentityUsersInput extends PagedAndSortedResultRequestDto {
-  filter?: string;
 }
 
 export interface IdentityRoleDto extends ExtensibleEntityDto<string> {

@@ -137,11 +137,17 @@
 
 <p-overlayPanel #op>
   <p-card>
-    <ng-template pTemplate="header">ìm kiếm nâng cao</ng-template>
     <div class="search-width">
       <div class="field col-12">
         <span class="p-float-label">
-          <input id="email" type="text" pInputText [(ngModel)]="emailSearch" class="w-full" />
+          <input
+            id="email"
+            type="text"
+            pInputText
+            [(ngModel)]="emailSearch"
+            class="w-full"
+            (keyup.enter)="loadData()"
+          />
           <label for="email">Email</label>
         </span>
       </div>
@@ -154,6 +160,7 @@
             pInputText
             [(ngModel)]="phoneNumberSearch"
             class="w-full"
+            (keyup.enter)="loadData()"
           />
           <label for="phoneNumber">Số ĐT</label>
         </span>
@@ -171,6 +178,7 @@
             [showClear]="true"
             [autoDisplayFirst]="false"
             styleClass="w-full"
+            (keyup.enter)="loadData()"
           ></p-dropdown>
           <label for="phoneNumber">Vai trò</label>
         </span>
@@ -186,7 +194,6 @@
         class="p-button-info mr-1"
         [pTooltip]="Actions.SEARCH"
         tooltipPosition="top"
-        (click)="loadData()"
       ></button>
     </ng-template>
   </p-card>

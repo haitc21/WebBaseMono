@@ -7,7 +7,7 @@ import {
 } from '@abp/ng.identity/proxy';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoleLookupDto, RolesService } from '@proxy/roles';
-import { UsersService } from '@proxy/users';
+import { GetUserListDto, UsersService } from '@proxy/users';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
@@ -41,7 +41,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public items: IdentityUserDto[];
   public selectedItems: IdentityUserDto[] = [];
   public keyword: string = '';
-  filter: GetIdentityUsersInput;
+  filter: GetUserListDto;
   emailSearch: string = '';
   phoneNumberSearch: string = '';
   roleIdSearch: string = '';
@@ -162,9 +162,12 @@ export class UserComponent implements OnInit, OnDestroy {
       filter: this.keyword,
       skipCount: this.skipCount,
       maxResultCount: this.maxResultCount,
+      email: this.emailSearch,
+      phoneNumber: this.phoneNumberSearch,
+      roleId: this.roleIdSearch
     };
     this.userService
-      .getList(this.filter)
+      .getListFilter(this.filter)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response: PagedResultDto<IdentityUserDto>) => {

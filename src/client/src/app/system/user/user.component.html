@@ -90,8 +90,8 @@
           </td>
           <td *ngIf="visibleActionColumn">
             <p-tieredMenu
-              [showTransitionOptions]="'200ms'"
-              [hideTransitionOptions]="'200ms'"
+              [showTransitionOptions]="'300ms'"
+              [hideTransitionOptions]="'300ms'"
               #menu
               [model]="actionMenu"
               [popup]="true"
@@ -120,7 +120,7 @@
           [showJumpToPageInput]="true"
           (onPageChange)="pageChanged($event)"
           currentPageReportTemplate="{totalRecords} bản ghi, {currentPage} trang"
-          [rowsPerPageOptions]="[10, 20, 50, 200]"
+          [rowsPerPageOptions]="[10, 20, 50, 300]"
         ></p-paginator>
       </ng-template>
     </p-table>

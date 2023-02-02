@@ -8,7 +8,6 @@
     />
     <span>HTTT KNTC</span>
   </a>
-
   <button
     #menubutton
     class="p-link layout-menu-button layout-topbar-button"
@@ -17,13 +16,7 @@
     <i class="pi pi-bars"></i>
   </button>
 
-  <button
-    #topbarmenubutton
-    class="p-link layout-topbar-menu-button layout-topbar-button"
-    (click)="layoutService.showProfileSidebar()"
-  >
-    <i class="pi pi-ellipsis-v"></i>
-  </button>
+  <p-menubar [model]="items"> </p-menubar>
 
   <div
     #topbarmenu
@@ -32,13 +25,21 @@
   >
     <button
       *ngIf="isAutenticated"
-      class="p-link layout-topbar-button"
+      pButton
+      pRipple
+      type="button"
+      [label]="userName"
+      icon="pi pi-user"
+      class="p-button-rounded p-button-info"
       (click)="userMenu.toggle($event)"
-    >
-      <i class="pi pi-user"></i>
-    </button>
-
-    <span>{{ userName }}</span>
+    ></button>
   </div>
 </div>
-<p-tieredMenu #userMenu [model]="userMenuItems" [popup]="true"></p-tieredMenu>
+
+<p-tieredMenu
+  #userMenu
+  [model]="userMenuItems"
+  [popup]="true"
+  [showTransitionOptions]="'300ms'"
+  [hideTransitionOptions]="'300ms'"
+></p-tieredMenu>

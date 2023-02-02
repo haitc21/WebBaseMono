@@ -362,7 +362,7 @@ export class UserComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 200);
+      }, 300);
     }
   }
 }

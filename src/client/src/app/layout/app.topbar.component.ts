@@ -19,12 +19,25 @@ export class AppTopBarComponent implements OnInit {
 
   @ViewChild('topbarmenu') menu!: ElementRef;
 
+  isAutenticated: boolean = false;
+  userName = '';
+
   constructor(
     public layoutService: LayoutService,
     private router: Router,
     private oAuthService: OAuthService
   ) {}
   ngOnInit(): void {
+    this.isAutenticated = this.oAuthService.hasValidAccessToken();
+    if (this.isAutenticated) {
+      const accessToken = this.oAuthService.getAccessToken();
+      // console.log('accessToken', accessToken);
+      // let identityClaim = this.oAuthService.getIdentityClaims();
+      // console.log('identityClaim', identityClaim); // null
+      let decodedAccessToken = atob(accessToken.split('.')[1]);
+      let accessTokenJson = JSON.parse(decodedAccessToken);
+      this.userName = accessTokenJson.preferred_username ?? '';
+    }
     this.userMenuItems = [
       {
         label: 'thông tin cá nhân',

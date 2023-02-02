@@ -30,10 +30,15 @@
     class="layout-topbar-menu"
     [ngClass]="{ 'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible }"
   >
-    <button class="p-link layout-topbar-button" (click)="userMenu.toggle($event)">
+    <button
+      *ngIf="isAutenticated"
+      class="p-link layout-topbar-button"
+      (click)="userMenu.toggle($event)"
+    >
       <i class="pi pi-user"></i>
-      <span>Tài khoản</span>
     </button>
+
+    <span>{{ userName }}</span>
   </div>
 </div>
 <p-tieredMenu #userMenu [model]="userMenuItems" [popup]="true"></p-tieredMenu>

@@ -176,9 +176,9 @@
             optionValue="id"
             filterBy="name"
             [showClear]="true"
+            filterPlaceholder="Tên vai trò"
             [autoDisplayFirst]="false"
             styleClass="w-full"
-            (keyup.enter)="loadData()"
           ></p-dropdown>
           <label for="phoneNumber">Vai trò</label>
         </span>
@@ -194,6 +194,7 @@
         class="p-button-info mr-1"
         [pTooltip]="Actions.SEARCH"
         tooltipPosition="top"
+        (click)="loadData()"
       ></button>
     </ng-template>
   </p-card>

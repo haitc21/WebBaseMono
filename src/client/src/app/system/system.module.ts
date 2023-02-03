@@ -37,16 +37,18 @@ import { PasswordModule } from 'primeng/password';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CardModule } from 'primeng/card';
 
+const COMPONENT = [
+  RoleComponent,
+  RoleDetailComponent,
+  PermissionGrantComponent,
+  UserComponent,
+  UserDetailComponent,
+  RoleAssignComponent,
+  SetPasswordComponent,
+];
+
 @NgModule({
-  declarations: [
-    RoleComponent,
-    RoleDetailComponent,
-    PermissionGrantComponent,
-    UserComponent,
-    UserDetailComponent,
-    RoleAssignComponent,
-    SetPasswordComponent,
-  ],
+  declarations: [...COMPONENT],
   imports: [
     CoreModule,
     PanelModule,
@@ -79,12 +81,6 @@ import { CardModule } from 'primeng/card';
     OverlayPanelModule,
     CardModule,
   ],
-  entryComponents: [
-    RoleDetailComponent,
-    PermissionGrantComponent,
-    UserDetailComponent,
-    RoleAssignComponent,
-    SetPasswordComponent,
-  ],
+  entryComponents: [...COMPONENT],
 })
 export class SystemModule {}

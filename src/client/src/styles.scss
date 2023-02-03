@@ -23,14 +23,32 @@ $gutter: 1rem; //for primeflex grid system
 .p-dropdown-panel {
   width: 100%;
 }
+
 .topmenu-light {
-  .p-menubar,
+  .p-menubar {
+    background-color: var(--yellow-200);
+  }
   .p-menubar .p-menuitem {
     background-color: var(--yellow-200);
+    animation: itemAnimation 3s;
   }
 }
 
 .p-menubar {
   border-radius: 0.5rem;
   height: 3rem;
+}
+
+@keyframes itemAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+  }
 }

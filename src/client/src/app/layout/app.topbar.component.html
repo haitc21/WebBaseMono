@@ -16,7 +16,11 @@
     <i class="pi pi-bars"></i>
   </button>
 
-  <p-menubar [model]="items"> </p-menubar>
+  <p-menubar
+    [model]="items"
+    [class]="layoutService.config.colorScheme === 'light' ? 'topmenu-light' : ''"
+  >
+  </p-menubar>
 
   <div
     #topbarmenu

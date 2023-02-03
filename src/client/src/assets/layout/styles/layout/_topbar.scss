@@ -7,7 +7,7 @@
   width: 100%;
   padding: 0 2rem;
   // background-color: var(--surface-card);
-  background-image: linear-gradient(to right, rgba(#3B82F6, 0.5), rgba(#3B82F6, 1));
+  background-image: linear-gradient(to right, rgba(#3b82f6, 0.9), rgba(#3b82f6, 0.7));
   transition: left $transitionDuration;
   display: flex;
   align-items: center;
@@ -67,8 +67,7 @@
   .layout-menu-button {
     margin-left: 1rem;
     margin-right: 1rem;
-    background-color: blue;
-    color: #fff;
+    background-color: var(--yellow-200);
   }
 
   .layout-topbar-menu-button {

@@ -7,9 +7,9 @@ $gutter: 1rem; //for primeflex grid system
 @import '../node_modules/primeicons/primeicons.css';
 
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-  background: #7070e8;
+  background: #3b82f6;
   border-color: red;
-  color: #eef2ff;
+  color: #fff;
 }
 #inputPassword {
   width: 100% !important;
@@ -23,11 +23,14 @@ $gutter: 1rem; //for primeflex grid system
 .p-dropdown-panel {
   width: 100%;
 }
+.topmenu-light {
+  .p-menubar,
+  .p-menubar .p-menuitem {
+    background-color: var(--yellow-200);
+  }
+}
 
-// .p-menubar,
-// .p-menuitem {
-//   background-color: blue;
-// }
-
-
-
+.p-menubar {
+  border-radius: 0.5rem;
+  height: 3rem;
+}

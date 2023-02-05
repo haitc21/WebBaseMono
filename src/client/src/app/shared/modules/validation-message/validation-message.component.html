@@ -1,4 +1,3 @@
-<!-- <ng-container *ngIf="entityControl.invalid && entityControl.dirty"> -->
     <ng-container *ngFor="let validation of validationMessages">
         <p-message
           severity="error"
@@ -6,5 +5,4 @@
           [@errorState]="entityControl.invalid && entityControl.dirty && entityControl.errors[validation.type] ? 'visible' : 'hidden'"
         ></p-message>
       </ng-container>
-    <!-- </ng-container> -->
     

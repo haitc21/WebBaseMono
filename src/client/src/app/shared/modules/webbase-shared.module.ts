@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { ValidationMessageComponent } from './validation-message/validation-message.component';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   imports: [CoreModule, CommonModule, MessagesModule, MessageModule],
-  declarations: [ValidationMessageComponent],
-  exports: [ValidationMessageComponent],
+  declarations: [ValidationMessageComponent,MapComponent],
+  exports: [ValidationMessageComponent,MapComponent],
 })
 export class WebBaseSharedModule {}

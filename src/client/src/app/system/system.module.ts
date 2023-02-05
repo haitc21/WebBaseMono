@@ -12,7 +12,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
-import { WebBaseSharedModule } from '../shared/modules/webbase-shared.module';
 import { BadgeModule } from 'primeng/badge';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -36,6 +35,7 @@ import { CoreModule } from '@abp/ng.core';
 import { PasswordModule } from 'primeng/password';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CardModule } from 'primeng/card';
+import { WebBaseSharedModule } from '../shared/modules/webbase-shared.module';
 
 const COMPONENT = [
   RoleComponent,

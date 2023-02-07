@@ -70,8 +70,8 @@ export class MapComponent implements AfterViewInit {
           maxZoom: 22,
           watch: true,
           enableHighAccuracy: true,
-          maximumAge: 10000,
-          timeout: 10000,
+          maximumAge: 1000,
+          timeout: 1000,
         },
       })
       .addTo(this.map);

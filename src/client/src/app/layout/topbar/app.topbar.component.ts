@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { LOGIN_URL } from '../shared/constants/urls.const';
-import { LayoutService } from './service/app.layout.service';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { PermissionService } from '@abp/ng.core';
+import { LayoutService } from '../service/app.layout.service';
+import { LOGIN_URL } from 'src/app/shared/constants/urls.const';
 
 @Component({
   selector: 'app-topbar',
@@ -24,6 +24,8 @@ export class AppTopBarComponent implements OnInit {
 
   isAutenticated: boolean = false;
   userName = '';
+  userId = '';
+  
 
   constructor(
     public layoutService: LayoutService,
@@ -38,6 +40,8 @@ export class AppTopBarComponent implements OnInit {
       let decodedAccessToken = atob(accessToken.split('.')[1]);
       let accessTokenJson = JSON.parse(decodedAccessToken);
       this.userName = accessTokenJson.preferred_username ?? '';
+      debugger
+      this.userId = accessTokenJson.sub ?? '';
     }
     this.initMenu();
     this.initMenuUser();

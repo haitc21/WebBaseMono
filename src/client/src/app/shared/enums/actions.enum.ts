@@ -7,7 +7,7 @@ export enum Actions {
   CANCEL = "Hủy",
   CLOSE = "Đóng",
   SET_PASSWORD = "Đặt mật khẩu",
-  ASSIGN_ROLE = "qQuản lý vai trò",
+  ASSIGN_ROLE = "Quản lý vai trò",
   SEARCH = "Tìm kiếm",
   ADVANCE_SEARCH = "Tìm kiếm nâng cao",
   ACTION = "Thao tác"

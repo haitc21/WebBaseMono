@@ -21,6 +21,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
+import {AvatarModule} from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MenubarModule } from 'primeng/menubar';
     PanelMenuModule,
     ButtonModule,
     MenubarModule,
+    AvatarModule
   ],
   exports: [AppLayoutComponent],
 })

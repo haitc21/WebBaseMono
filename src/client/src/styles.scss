@@ -27,24 +27,24 @@ $gutter: 1rem; //for primeflex grid system
 .topmenu {
   position: fixed;
   height: 5rem;
-  z-index: 997;
   left: 0;
   top: 0;
   width: 100%;
-  // background-color: var(--surface-card);
-  transition: left $transitionDuration;
-
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 4px rgba(0, 0, 0, 0.08);
+  z-index: 100000 !important;
 
   .topmenu-logo {
     display: flex;
     align-items: center;
-    color: var(--surface-900);
     font-size: 1.5rem;
     font-weight: 500;
     width: 200px;
     border-radius: 12px;
+    a {
+      padding-left: 20px;
+      color: #fff;
+      font-weight: 800;
+    }
+
 
     img {
       height: 2.5rem;
@@ -57,35 +57,38 @@ $gutter: 1rem; //for primeflex grid system
   }
 
   .p-menubar,
+  .p-menubar-root-list,
   .p-menu-list,
-  .p-menuitem {
-    background-color: #3b82f6;
-    border: #3b82f6;
-    z-index: 9970;
-  }
-  .p-menuitem {
-    animation: itemAnimation 0.3s;
-    z-index: 9970;
+  .p-menuitem,
+  ul,
+  li {
+    background-color: #3b82f6 !important;
+    border: #3b82f6 !important;
   }
   .p-menuitem-text,
   .p-menuitem-icon,
   .p-submenu-icon {
     color: #fff !important;
+    font-size: 1rem;
+  }
+  .p-menuitem-icon {
     font-size: 1.5rem;
+    font-weight: 800;
   }
-}
-
-@keyframes itemAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(-1rem);
+  .p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background: #295bac;
   }
-  50% {
-    opacity: 0.5;
-    transform: translateY(-0.5rem);
+  .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link,
+  .p-menubar
+    .p-menubar-root-list
+    > .p-menuitem.p-menuitem-active
+    > .p-menuitem-link:not(.p-disabled):hover {
+    background: #295bac;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
+  .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover {
+    background: #295bac;
+  }
+  .p-menubar .p-menuitem-link:not(.p-disabled):hover {
+    background: #295bac;
   }
 }

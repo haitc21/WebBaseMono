@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { LOGIN_URL } from '../shared/constants/urls.const';
 import { LayoutService } from './service/app.layout.service';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { PermissionService } from '@abp/ng.core';
 
 @Component({
   selector: 'app-topbar',
@@ -13,6 +14,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class AppTopBarComponent implements OnInit {
   items!: MenuItem[];
   userMenuItems: MenuItem[];
+  systemMenuItems: MenuItem[];
 
   @ViewChild('menubutton') menuButton!: ElementRef;
 
@@ -26,7 +28,8 @@ export class AppTopBarComponent implements OnInit {
   constructor(
     public layoutService: LayoutService,
     private router: Router,
-    private oAuthService: OAuthService
+    private oAuthService: OAuthService,
+    private permissionService: PermissionService
   ) {}
   ngOnInit(): void {
     this.isAutenticated = this.oAuthService.hasValidAccessToken();
@@ -36,148 +39,122 @@ export class AppTopBarComponent implements OnInit {
       let accessTokenJson = JSON.parse(decodedAccessToken);
       this.userName = accessTokenJson.preferred_username ?? '';
     }
-    this.items = [
-      {
-        label: 'File',
-        icon: 'pi pi-fw pi-file',
-        items: [
-          {
-            label: 'New',
-            icon: 'pi pi-fw pi-plus',
-            items: [
-              {
-                label: 'Bookmark',
-                icon: 'pi pi-fw pi-bookmark',
-              },
-              {
-                label: 'Video',
-                icon: 'pi pi-fw pi-video',
-              },
-            ],
-          },
-          {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-trash',
-          },
-          {
-            separator: true,
-          },
-          {
-            label: 'Export',
-            icon: 'pi pi-fw pi-external-link',
-          },
-        ],
-      },
-      {
-        label: 'Edit',
-        icon: 'pi pi-fw pi-pencil',
-        items: [
-          {
-            label: 'Left',
-            icon: 'pi pi-fw pi-align-left',
-          },
-          {
-            label: 'Right',
-            icon: 'pi pi-fw pi-align-right',
-          },
-          {
-            label: 'Center',
-            icon: 'pi pi-fw pi-align-center',
-          },
-          {
-            label: 'Justify',
-            icon: 'pi pi-fw pi-align-justify',
-          },
-        ],
-      },
-      {
-        label: 'Users',
-        icon: 'pi pi-fw pi-user',
-        items: [
-          {
-            label: 'New',
-            icon: 'pi pi-fw pi-user-plus',
-          },
-          {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-user-minus',
-          },
-          {
-            label: 'Search',
-            icon: 'pi pi-fw pi-users',
-            items: [
-              {
-                label: 'Filter',
-                icon: 'pi pi-fw pi-filter',
-                items: [
-                  {
-                    label: 'Print',
-                    icon: 'pi pi-fw pi-print',
-                  },
-                ],
-              },
-              {
-                icon: 'pi pi-fw pi-bars',
-                label: 'List',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: 'Events',
-        icon: 'pi pi-fw pi-calendar',
-        items: [
-          {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              {
-                label: 'Save',
-                icon: 'pi pi-fw pi-calendar-plus',
-              },
-              {
-                label: 'Delete',
-                icon: 'pi pi-fw pi-calendar-minus',
-              },
-            ],
-          },
-          {
-            label: 'Archieve',
-            icon: 'pi pi-fw pi-calendar-times',
-            items: [
-              {
-                label: 'Remove',
-                icon: 'pi pi-fw pi-calendar-minus',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off',
-      },
-    ];
+    this.initMenu();
+    this.initMenuUser();
+    this.initMenuSystem();
+  }
+  initMenuUser() {
     this.userMenuItems = [
       {
         label: 'Thông tin cá nhân',
-        icon: 'pi pi-id-card',
+        // icon: 'pi pi-id-card',
         routerLink: ['/profile'],
       },
       {
         label: 'Đổi mật khẩu',
-        icon: 'pi pi-key',
+        // icon: 'pi pi-key',
         routerLink: ['/change-password'],
       },
       {
         label: 'Đăng xuất',
-        icon: 'pi pi-sign-out',
+        // icon: 'pi pi-sign-out',
         command: event => {
           this.oAuthService.logOut();
           this.router.navigate([LOGIN_URL, this.router.url]);
         },
       },
     ];
+  }
+
+  initMenu() {
+    this.items = [
+      {
+        icon: 'pi pi-fw pi-home',
+        routerLink: ['/'],
+      },
+      {
+        label: 'Bản đồ',
+        icon: 'pi pi-fw pi-map',
+        routerLink: ['/'],
+      },
+      {
+        label: 'Khiếu nại',
+        icon: 'pi pi-fw pi-envelope',
+        routerLink: ['/'],
+        items: [
+          {
+            label: 'Đất đai',
+            routerLink: ['/'],
+          },
+          {
+            label: 'Môi trường',
+            routerLink: ['/'],
+          },
+
+          {
+            label: 'Khoáng sản',
+            routerLink: ['/'],
+          },
+          {
+            label: 'Tài nguyên nước',
+            routerLink: ['/'],
+          },
+        ],
+      },
+      {
+        label: 'Tố cáo',
+        icon: 'fa fa-balance-scale',
+        routerLink: ['/'],
+        items: [
+          {
+            label: 'Đất đai',
+            routerLink: ['/'],
+          },
+
+          {
+            label: 'Môi trường',
+            routerLink: ['/'],
+          },
+
+          {
+            label: 'Khoáng sản',
+            routerLink: ['/'],
+          },
+          {
+            label: 'Tài nguyên nước',
+            routerLink: ['/'],
+          },
+        ],
+      },
+    ];
+  }
+
+  initMenuSystem() {
+    this.systemMenuItems = [
+      {
+        label: 'Cấu hình hệ thống',
+        routerLink: ['/'],
+      },
+      {
+        label: 'Quản lý ngời dùng',
+        // icon: 'pi pi-fw pi-users',
+        routerLink: ['/system/user'],
+        visible: this.permissionService.getGrantedPolicy('AbpIdentity.Users'),
+      },
+      {
+        label: 'Quản lý vai trò',
+        // icon: 'pi pi-fw pi-user-edit',
+        routerLink: ['/system/role'],
+        visible: this.permissionService.getGrantedPolicy('AbpIdentity.Roles'),
+      },
+      {
+        label: 'Danh mục',
+        routerLink: ['/'],
+      },
+    ];
+  }
+
+  login() {
+    this.router.navigate([LOGIN_URL, this.router.url]);
   }
 }

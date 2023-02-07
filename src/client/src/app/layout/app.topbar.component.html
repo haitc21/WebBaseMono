@@ -1,43 +1,9 @@
-<!-- <div class="layout-topbar">
-  <a class="layout-topbar-logo" routerLink="">
-    <img src="assets/layout/images/logo-white.svg" alt="logo" />
-    <span style="color: #fff">HTTT KNTC</span>
-    <button
-      #menubutton
-      pButton
-      pRipple
-      icon="pi pi-bars"
-      class="p-button-rounded p-button-info ml-6"
-      (click)="layoutService.onMenuToggle()"
-    ></button>
-  </a>
-
-  <p-menubar [model]="items" class="topmenu"> </p-menubar>
-
-  <div
-    #topbarmenu
-    class="layout-topbar-menu"
-    [ngClass]="{ 'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible }"
-  >
-    <button
-      *ngIf="isAutenticated"
-      pButton
-      pRipple
-      type="button"
-      [label]="userName"
-      icon="pi pi-user"
-      class="p-button-info"
-      (click)="userMenu.toggle($event)"
-    ></button>
-  </div>
-</div> -->
-
 <p-menubar [model]="items" class="topmenu">
   <ng-template pTemplate="start">
     <div class="topmenu-logo">
       <a routerLink="">
         <!-- <img src="assets/layout/images/logo-white.svg" alt="logo" /> -->
-        <span style="color: #fff">HTTT KNTC</span>
+        <span>HTTT KNTC</span>
       </a>
 
       <button
@@ -52,22 +18,54 @@
   </ng-template>
 
   <ng-template pTemplate="end">
-    <button
-      *ngIf="isAutenticated"
-      pButton
-      pRipple
-      type="button"
-      [label]="userName"
-      icon="pi pi-user"
-      class="p-button-info"
-      (click)="userMenu.toggle($event)"
-    ></button>
+    <span class="p-buttonset">
+      <button
+        *ngIf="isAutenticated"
+        pButton
+        pRipple
+        type="button"
+        label="Hệ thống"
+        icon="fa fa-cogs"
+        class="p-button-lg p-button-info mr-2"
+        (click)="systemMenu.toggle($event)"
+      ></button>
+
+      <button
+        *ngIf="isAutenticated"
+        pButton
+        pRipple
+        type="button"
+        class="p-button-info"
+        [label]="userName"
+        (click)="userMenu.toggle($event)"
+      >
+        <img src="assets/images/avatar/anonimous.png" class="avatar" alt="avatar" />
+      </button>
+
+      <button
+        *ngIf="!isAutenticated"
+        pButton
+        pRipple
+        type="button"
+        label="!Đăng nhập"
+        class="p-button-info"
+        (click)="login()"
+      ></button>
+    </span>
   </ng-template>
 </p-menubar>
 
 <p-tieredMenu
   #userMenu
   [model]="userMenuItems"
+  [popup]="true"
+  [showTransitionOptions]="'300ms'"
+  [hideTransitionOptions]="'300ms'"
+></p-tieredMenu>
+
+<p-tieredMenu
+  #systemMenu
+  [model]="systemMenuItems"
   [popup]="true"
   [showTransitionOptions]="'300ms'"
   [hideTransitionOptions]="'300ms'"

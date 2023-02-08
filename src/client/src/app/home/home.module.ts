@@ -30,6 +30,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CardModule } from 'primeng/card';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import {InputSwitchModule} from 'primeng/inputswitch';
+
 
 @NgModule({
   declarations: [HomeComponent],
@@ -64,6 +66,7 @@ import { HomeComponent } from './home.component';
     PasswordModule,
     OverlayPanelModule,
     CardModule,
+    InputSwitchModule
   ],
 })
 export class HomeModule {}

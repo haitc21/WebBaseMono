@@ -1,1 +1,32 @@
-/* Styles for the home component */
+.home-sidebar {
+  background-color: var(--gray-500);
+  height: 500px;
+  margin-top: 1rem;
+}
+.home-sidebar-header {
+  background-color: #3b82f6;
+  color: #fff;
+  text-align: center;
+  height: 3rem;
+}
+.inputgroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.group-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 10px;
+  }
+  .icon-red {
+    width: 3rem;
+    height: 3rem;
+    margin-left: -10px;
+  }
+}

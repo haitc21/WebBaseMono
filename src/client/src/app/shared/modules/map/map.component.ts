@@ -1,9 +1,9 @@
 import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.locatecontrol';
-const iconRetinaUrl = 'assets/images//marker-icon-2x.png';
-const iconUrl = 'assets/images/marker-icon.png';
-const shadowUrl = 'assets/images/marker-shadow.png';
+const iconRetinaUrl = 'assets/images/map//marker-icon-2x.png';
+const iconUrl = 'assets/images/map/marker-icon.png';
+const shadowUrl = 'assets/images/map/marker-shadow.png';
 const iconDefault = L.icon({
   iconRetinaUrl,
   iconUrl,

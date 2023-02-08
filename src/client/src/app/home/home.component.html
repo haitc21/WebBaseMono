@@ -1,2 +1,78 @@
-<h1>Home</h1>
-<app-map></app-map>
+<div class="animated fadeIn">
+  <p-panel #pnl header="Trang chủ">
+    <div class="grid">
+      <div class="col-12 md:col-2 home-sidebar">
+        <p-card>
+          <ng-template pTemplate="header">
+            <h3 class="home-sidebar-header">Lớp bản đồ</h3>
+          </ng-template>
+
+          <!-- ----------------------------------------------------------------------- -->
+
+          <div class="grid col-12 md:col-12">
+            <div class="group-header ml-3">
+              <img src="assets/images/map/marker-icon.png" alt="Khiêu nại" />
+              <span>Khiêu nại</span>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Đất đai</span>
+              <p-inputSwitch [(ngModel)]="landComplaint"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Môi trường</span>
+              <p-inputSwitch [(ngModel)]="enviromentalComplaint"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Tài nguyên nước</span>
+              <p-inputSwitch [(ngModel)]="waterResourcedComplaint"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Khoáng sản</span>
+              <p-inputSwitch [(ngModel)]="mineralResourcedComplaint"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="group-header ml-3 mt-5">
+                <img src="assets/images/map/marker-icon-red.png" class="icon-red" alt="Khiêu nại" />
+              <span>Tố Cáo</span>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Đất đai</span>
+              <p-inputSwitch [(ngModel)]="landAccusation"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Môi trường</span>
+              <p-inputSwitch [(ngModel)]="emviromentalAccusation"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Tài nguyên nước</span>
+              <p-inputSwitch [(ngModel)]="waterResourcedAccusation"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="inputgroup">
+              <span class="ml-5">Khoáng sản</span>
+              <p-inputSwitch [(ngModel)]="mineralResourcedAccusation"></p-inputSwitch>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+          </div>
+        </p-card>
+      </div>
+      <div class="col-12 md:col-10">
+        <app-map></app-map>
+      </div>
+    </div>
+    <p-blockUI [target]="pnl" [blocked]="blockedPanel">
+      <p-progressSpinner
+        [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+        strokeWidth="2"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</div>

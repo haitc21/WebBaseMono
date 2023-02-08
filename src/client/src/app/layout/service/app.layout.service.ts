@@ -1,3 +1,4 @@
+import { trigger } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -34,7 +35,7 @@ export class LayoutService {
     };
 
     state: LayoutState = {
-        staticMenuDesktopInactive: false,
+        staticMenuDesktopInactive: true,
         overlayMenuActive: false,
         profileSidebarVisible: false,
         configSidebarVisible: false,
@@ -51,6 +52,7 @@ export class LayoutService {
     overlayOpen$ = this.overlayOpen.asObservable();
 
     onMenuToggle() {
+        debugger
         if (this.isOverlay()) {
             this.state.overlayMenuActive = !this.state.overlayMenuActive;
             if (this.state.overlayMenuActive) {

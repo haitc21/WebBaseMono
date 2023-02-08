@@ -78,7 +78,6 @@ export class RoleAssignComponent implements OnInit, OnDestroy {
 
   saveChange() {
     this.toggleBlockUI(true);
-    debugger;
     let roleNames = this.seletedRoles.map(x => x.name);
     let updateRoleDto: IdentityUserUpdateRolesDto = { roleNames: [...roleNames] };
     this.userService

@@ -40,7 +40,6 @@ export class AppTopBarComponent implements OnInit {
       let decodedAccessToken = atob(accessToken.split('.')[1]);
       let accessTokenJson = JSON.parse(decodedAccessToken);
       this.userName = accessTokenJson.preferred_username ?? '';
-      debugger
       this.userId = accessTokenJson.sub ?? '';
     }
     this.initMenu();

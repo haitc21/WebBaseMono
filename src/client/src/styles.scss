@@ -96,14 +96,18 @@ $gutter: 1rem; //for primeflex grid system
   tr,
   th,
   td {
-    border: solid 1px #3b82f6 !important;
+    border: solid 1px var(--gray-500) !important;
   }
 }
 
-.sidebar .p-card-header, .p-card-body {
+.sidebar .p-card-header,
+.p-card-body {
   padding: 0 !important;
   margin: 0 !important;
 }
 .p-panel-header {
   font-size: 1.5rem;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
 }
